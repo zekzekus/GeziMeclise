@@ -1,7 +1,7 @@
 GeziMeclise.org Platformu
 =========================
 
-Gezi Meclise platformu, seni veya seni temsil edecek miletvekillerini, Gezi dayanışmasının ruhu ile, şeffaf bir şekilde, ortak akılla belirlemek ve bağımsız aday olarak genel seçimlerde desteklemek üzere hep birlikte geliştirdiğimiz bir web sitesidir.
+Gezi Meclise platformu, seni veya seni temsil edecek milletvekillerini, Gezi dayanışmasının ruhu ile, şeffaf bir şekilde, ortak akılla belirlemek ve bağımsız aday olarak genel seçimlerde desteklemek üzere hep birlikte geliştirdiğimiz bir web sitesidir.
 
 
 Nasıl çalışır?
@@ -11,5 +11,5 @@ Kullanıcılar, sosyal ağ profil bilgileri ve mecliste neler için mücadele ed
 
 Burada rekabet değil dayanışma esastır. Önemli olan aday olmak değil, kendinizi ve hareketi en iyi temsil edeceğini düşündüğünüz adayların belirlenmesidir. 
 
-Adaylar millet vekili olduktan sonra da Gezi dayanışmasına karşı sorumlulukları devam edecek, kullandıkları oylar ve çalışmaları yine bu platformdan takip edilecektir. 
+Adaylar milletvekili olduktan sonra da Gezi dayanışmasına karşı sorumlulukları devam edecek, kullandıkları oylar ve çalışmaları yine bu platformdan takip edilecektir. 
 
