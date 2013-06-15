@@ -21,7 +21,7 @@ SECRET_KEY = '8s_ec*#v3t_whk(tacthnk#!adw*$^8hnffd$6bgch(z_@1o^o'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-),
+)
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
@@ -49,8 +49,7 @@ MIDDLEWARE_CLASSES = (
 )
 ROOT_URLCONF = 'gezimeclise.urls'
 WSGI_APPLICATION = 'gezimeclise.wsgi.application'
-TEMPLATE_DIRS = (
-)
+TEMPLATE_DIRS = ()
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
