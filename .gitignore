@@ -3,5 +3,7 @@
 *.pyc
 .*
 local_settings.py
+*.db
+!.gitignore
 /env
 
