@@ -33,11 +33,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
     'django_facebook.context_processors.facebook',
-),
+)
+
 AUTHENTICATION_BACKENDS = (
     'django_facebook.auth_backends.FacebookBackend',
     'django.contrib.auth.backends.ModelBackend',
-),
+)
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -58,7 +59,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'djagno_facebook',
+    'django_facebook',
+    'gezimeclise.profiles',
 )
 LOGGING = {
     'version': 1,
@@ -83,3 +85,5 @@ LOGGING = {
         },
     }
 }
+
+AUTH_USER_MODEL = 'profiles.GeziUser'
