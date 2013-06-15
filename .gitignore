@@ -4,5 +4,6 @@
 .*
 *.db
 !.gitignore
+settings_local.py
 /env
 
