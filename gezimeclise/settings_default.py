@@ -62,6 +62,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django_facebook',
     'south',
+    'taggit',
     'gezimeclise.profiles',
 )
 LOGGING = {
