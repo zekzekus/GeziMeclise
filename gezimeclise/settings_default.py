@@ -10,8 +10,8 @@ SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-MEDIA_ROOT = ''
-MEDIA_URL = ''
+MEDIA_ROOT = (PROJECT_PATH + "/media/")
+MEDIA_URL = '/media/'
 STATIC_ROOT = (PROJECT_PATH + "/collect_static/")
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ((PROJECT_PATH + "/static"),)
@@ -88,3 +88,4 @@ LOGGING = {
 }
 
 AUTH_USER_MODEL = 'profiles.GeziUser'
+PROFILE_IMAGE_PATH = os.path.join(MEDIA_ROOT,'facebook_profiles/%Y/%m/%d')
