@@ -5,3 +5,6 @@ django-facebook==5.2.6
 wsgiref==0.1.2
 django-taggit
 django-taggit-templatetags
+django-extensions
+ipython
+ipdb

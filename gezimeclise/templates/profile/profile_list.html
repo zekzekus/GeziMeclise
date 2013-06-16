@@ -2,16 +2,15 @@
 {% block first_content %}
     {% for object in object_list %}
     {% if not object.is_superuser %}
-    <p>
 
+    <div class="span3">
         <img src="{{ MEDIA_URL}}{{object.image }}">
         <p><b>{{object.first_name}} {{ object.last_name }}</b><p>
         <p> destekleyenler : {{object.supports|length}}</p>
         {% for tag in object.tags.all %}
             {{ tag.name }}
         {% endfor %}
-
-    </p>
+    </div>
 {% endif %}
 {% endfor %}
 {% endblock %}
