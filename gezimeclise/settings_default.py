@@ -64,6 +64,7 @@ INSTALLED_APPS = (
     'south',
     'taggit',
     'gezimeclise.profiles',
+    'taggit'
 )
 LOGGING = {
     'version': 1,
