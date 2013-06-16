@@ -10,3 +10,6 @@ class ProfileListView(ListView):
 
 class ProfileDetailView(DetailView):
     model = GeziUser
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
+    template_name = "profile/profile_detail.html"

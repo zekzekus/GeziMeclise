@@ -51,7 +51,7 @@ MIDDLEWARE_CLASSES = (
 )
 ROOT_URLCONF = 'gezimeclise.urls'
 WSGI_APPLICATION = 'gezimeclise.wsgi.application'
-TEMPLATE_DIRS = (PROJECT_PATH + "/templates/")
+TEMPLATE_DIRS = (PROJECT_PATH + "/gezimeclise/templates/")
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
