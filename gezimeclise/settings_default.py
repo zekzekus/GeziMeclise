@@ -1,5 +1,8 @@
 # Django settings for gezimeclise project.
+import os
 
+PROJECT_DIR = os.path.dirname(__file__)
+PROJECT_PATH = os.path.abspath(os.path.join(PROJECT_DIR, os.pardir))
 
 TIME_ZONE = 'America/Chicago'
 LANGUAGE_CODE = 'en-us'
@@ -49,7 +52,7 @@ MIDDLEWARE_CLASSES = (
 )
 ROOT_URLCONF = 'gezimeclise.urls'
 WSGI_APPLICATION = 'gezimeclise.wsgi.application'
-TEMPLATE_DIRS = ()
+TEMPLATE_DIRS = (PROJECT_PATH + "/templates/")
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
