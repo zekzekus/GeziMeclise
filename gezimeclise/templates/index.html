@@ -4,7 +4,9 @@
 {% block first_content %}
         <h1>Gezi Meclis'e</h1>
         <p class="lead">Gezi Direnişi'ni Meclis'e taşımak, katılımcı doğrudan demokrasiyi temellerinden yeniden inşaa etmek için</p>
-        <a class="btn btn-large btn-success" href="#">Üye ol!</a>
+        {% if not user.is_authenticated %}
+        	<a class="btn btn-large btn-success" href="{% url "facebook_connect" %}">Üye ol!</a>
+        {% endif %}
 {% endblock %}
 
 {% block second_content %}
