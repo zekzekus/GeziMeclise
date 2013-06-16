@@ -1,4 +1,5 @@
 {% extends "base.html" %}
-{% for i in object_list %}
-{{ i }}
-{% endfor %}
+{% block first_content %}
+
+    <p><img src="{{object_list.1.image }}"></p>
+{% endblock %}
