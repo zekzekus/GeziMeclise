@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.views.generic import ListView, DetailView
 from gezimeclise.profiles.models import GeziUser
 
@@ -8,6 +9,11 @@ class ProfileListView(ListView):
     template_name = "profile/profile_list.html"
 
     def get_queryset(self):
+
+        if self.request.GET.get('q'):
+            q = self.request.GET.get('q')
+            return self.model.objects.filter(
+                Q(first_name__icontains=q) | Q(last_name__icontains=q))
         if self.request.GET.get('tag'):
             tag = self.request.GET.get("tag")
             return self.model.objects.filter(tags__name__in=["%s" % tag])
