@@ -3,3 +3,5 @@ Pillow==2.0.0
 South==0.8.1
 django-facebook==5.2.6
 wsgiref==0.1.2
+django-taggit
+django-taggit-templatetags

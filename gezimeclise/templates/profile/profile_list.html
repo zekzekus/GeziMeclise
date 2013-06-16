@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 {% block first_content %}
 
-    <p><img src="{{ MEDIA_URL}}{{object_list.1.image }}"></p>
+    <p>
+        <img src="{{ MEDIA_URL}}{{object_list.1.image }}">
+        <p><b>{{object_list.1.first_name}} {{ object_list.1.last_name }}</b><p>
+        <p> destekleyenler : {{objects_list.1.supports|length}}</p>
+        {% for tag in object_list.1.tags.all %}
+            {{ tag.name }}
+        {% endfor %}
+
+    </p>
+
 {% endblock %}
