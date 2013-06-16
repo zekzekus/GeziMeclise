@@ -10,8 +10,6 @@ class ProfileListView(ListView):
     def get_queryset(self):
         if self.request.GET.get('tag'):
             tag = self.request.GET.get("tag")
-            import ipdb
-            ipdb.set_trace()
             return self.model.objects.filter(tags__name__in=["%s" % tag])
         else:
             return super(ProfileListView, self).get_queryset()
