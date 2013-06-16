@@ -7,6 +7,6 @@ from taggit.managers import TaggableManager
 class GeziUser(AbstractUser, FacebookModel):
     supports = models.ManyToManyField('self', blank=True, related_name='supporters')
     causes = models.TextField(blank=True, null=True)
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     objects = UserManager()
