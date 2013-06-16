@@ -2,14 +2,16 @@
 {% block first_content %}
     {% for object in object_list %}
     {% if not object.is_superuser %}
-
     <div class="span3">
+        <a href="{% url "profile_detail" object.username %}">
         <img src="{{ MEDIA_URL}}{{object.image }}">
-        <p><b>{{object.first_name}} {{ object.last_name }}</b><p>
+        <p><b>{{object.first_name}} {{ object.last_name }}</b><p></a>
         <p> destekleyenler : {{object.supports|length}}</p>
-        {% for tag in object.tags.all %}
-            {{ tag.name }}
-        {% endfor %}
+
+        Tags:{% for tag in object.tags.all %}
+            <a id="tag" href="?tag={{tag.name}}">{{tag.name}}</a>
+             {% endfor %}
+
     </div>
 {% endif %}
 {% endfor %}
