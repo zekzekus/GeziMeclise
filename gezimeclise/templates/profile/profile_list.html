@@ -1,14 +1,17 @@
 {% extends "base.html" %}
 {% block first_content %}
-
+    {% for object in object_list %}
+    {% if not object.is_superuser %}
     <p>
-        <img src="{{ MEDIA_URL}}{{object_list.1.image }}">
-        <p><b>{{object_list.1.first_name}} {{ object_list.1.last_name }}</b><p>
-        <p> destekleyenler : {{objects_list.1.supports|length}}</p>
-        {% for tag in object_list.1.tags.all %}
+
+        <img src="{{ MEDIA_URL}}{{object.image }}">
+        <p><b>{{object.first_name}} {{ object.last_name }}</b><p>
+        <p> destekleyenler : {{object.supports|length}}</p>
+        {% for tag in object.tags.all %}
             {{ tag.name }}
         {% endfor %}
 
     </p>
-
+{% endif %}
+{% endfor %}
 {% endblock %}
