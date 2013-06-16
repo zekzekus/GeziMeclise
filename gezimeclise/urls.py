@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
 from gezimeclise.profiles import urls as gezimecliseurl
+from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -12,3 +13,8 @@ urlpatterns = patterns('',
     url(r'^facebook/', include('django_facebook.urls')),
     url(r'^accounts/', include('django_facebook.auth_urls'))
 )
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve',
+         {'document_root':settings.MEDIA_ROOT}),
+    )
