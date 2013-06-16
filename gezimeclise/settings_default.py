@@ -12,10 +12,9 @@ USE_L10N = True
 USE_TZ = True
 MEDIA_ROOT = ''
 MEDIA_URL = ''
-STATIC_ROOT = ''
+STATIC_ROOT = (PROJECT_PATH + "/collect_static/")
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-)
+STATICFILES_DIRS = ((PROJECT_PATH + "/static"),)
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
