@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block first_content %}
+<form class="form-horizontal" method="post">{% csrf_token %}
+  <div class="control-group">
+{{ form }}
+
+  </div>
+
+<button type="submit" class="btn">Kaydet</button>
+ </form>
+    <p>
+    <button class="btn" onclick="sendRequestViaMultiFriendSelector(); return false;"
+      value="Send Request">Arkadaşlarını davet et</button>
+    </p>
+{% endblock %}

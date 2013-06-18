@@ -1,6 +1,7 @@
 from django.db.models import Q
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from gezimeclise.profiles.models import GeziUser
+from gezimeclise.profiles.forms import ProfileUpdateForm
 
 
 class ProfileListView(ListView):
@@ -20,8 +21,19 @@ class ProfileListView(ListView):
         else:
             return super(ProfileListView, self).get_queryset()
 
+
 class ProfileDetailView(DetailView):
     model = GeziUser
     slug_field = 'username'
     slug_url_kwarg = 'username'
     template_name = "profile/profile_detail.html"
+
+
+class ProfileUpdateView(UpdateView):
+    model = GeziUser
+    success_url = "/"
+    form_class = ProfileUpdateForm
+    template_name = "profile/update_profile.html"
+
+    def get_object(self,queryset=None):
+        return self.request.user

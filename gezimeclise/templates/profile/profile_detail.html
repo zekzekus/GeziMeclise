@@ -2,9 +2,15 @@
 {% block first_content %}
 
     <p><img src="{{ MEDIA_URL}}{{ object.image }}"></p>
+    <p>{{ object.first_name }} {{ object.last_name }}</p>
+    <p>{{ object.about_me  }}</p>
+    <p>{{ object.website_url }}</p>
+    <p>{{ object.blog_url }}</p>
+    <p>{{ object.facebook_profile_url }}
+    <p>{{ object.date_of_birth }}</p>
+    <p>{{ object.website_url }}</p>
 
-    <p>
-    <button class="btn" onclick="sendRequestViaMultiFriendSelector(); return false;"
-      value="Send Request">Invite your friends</button>
-    </p>
+
+
+
 {% endblock %}
