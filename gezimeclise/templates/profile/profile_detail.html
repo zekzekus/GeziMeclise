@@ -9,8 +9,22 @@
     <p>{{ object.facebook_profile_url }}
     <p>{{ object.date_of_birth }}</p>
     <p>{{ object.website_url }}</p>
-
-
-
-
+    <p>Supports:{{object.supports.all|length }}</p>
+    <input class="username" type="hidden" data-username="{{ object.username }}">
+    <button class="btn destek">Destek Ol</button>
+{% endblock %}
+{% block footer %}
+    <script>
+    var username = $('.username').attr('data-username');
+    $('.destek').click(function(){
+        $.ajax({
+            url:"/profiles/support/",
+            type:"POST",
+            data:{"username":username, 'csrfmiddlewaretoken': '{{csrf_token}}'},
+            dataType:"json"
+        }).done(function(){
+                    $('.destek').attr("disabled")
+                })
+    })
+    </script>
 {% endblock %}

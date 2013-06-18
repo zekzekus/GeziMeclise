@@ -1,4 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, UpdateView
 from gezimeclise.profiles.models import GeziUser
 from gezimeclise.profiles.forms import ProfileUpdateForm
@@ -37,3 +39,12 @@ class ProfileUpdateView(UpdateView):
 
     def get_object(self,queryset=None):
         return self.request.user
+
+#TODO: Remove support and disable support button when already supported will be added
+#TODO: Support view will be transformed to CBV
+def support_view(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        user = GeziUser.objects.get(username=username)
+        request.user.supports.add(user)
+    return HttpResponse()
