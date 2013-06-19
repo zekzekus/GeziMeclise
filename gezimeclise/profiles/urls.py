@@ -2,7 +2,7 @@ from django.conf.urls import patterns, url
 from gezimeclise.profiles.views import (ProfileListView,
                                         ProfileDetailView,
                                         ProfileUpdateView,
-                                        support_view)
+                                        ProfilePostSupport)
 
 urlpatterns = patterns('',
                        url(r'^$', ProfileListView.as_view(),
@@ -12,5 +12,5 @@ urlpatterns = patterns('',
                            name="profile_detail"),
                        url(r'^update/$',
                            ProfileUpdateView.as_view()),
-                       url(r'^support/$', support_view
+                       url(r'^support/$', ProfilePostSupport.as_view()
                            ),)

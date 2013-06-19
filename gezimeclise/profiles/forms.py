@@ -10,6 +10,6 @@ class ProfileUpdateForm(ModelForm):
                    'gender', 'facebook_open_graph', 'new_token_required',
                    'supports', 'username', 'is_active', 'date_joined',
                    'is_staff', 'is_superuser', 'groups', 'user_permissions',
-                   'password', 'last_login', 'facebook_id']
+                   'password', 'last_login', 'facebook_id', 'raw_data']
 
 

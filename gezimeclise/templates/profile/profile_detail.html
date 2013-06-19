@@ -15,16 +15,20 @@
 {% endblock %}
 {% block footer %}
     <script>
-    var username = $('.username').attr('data-username');
+    $(function () {
+
+
+        var username = $('.username').attr('data-username');
     $('.destek').click(function(){
         $.ajax({
             url:"/profiles/support/",
             type:"POST",
             data:{"username":username, 'csrfmiddlewaretoken': '{{csrf_token}}'},
-            dataType:"json"
-        }).done(function(){
-                    $('.destek').attr("disabled")
-                })
+            dataType:"json",
+            complete: function(){ }
+         })
     })
+
+    });
     </script>
 {% endblock %}
