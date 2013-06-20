@@ -12,7 +12,7 @@ USE_L10N = True
 USE_TZ = True
 MEDIA_ROOT = (PROJECT_PATH + "/media/")
 MEDIA_URL = '/media/'
-STATIC_ROOT = (PROJECT_PATH + "/collect_static/")
+STATIC_ROOT = (PROJECT_PATH + "/assets/")
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ((PROJECT_PATH + "/static"),)
 STATICFILES_FINDERS = (
@@ -52,7 +52,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'gezimeclise.urls'
 WSGI_APPLICATION = 'gezimeclise.wsgi.application'
 TEMPLATE_DIRS = (PROJECT_PATH + "/gezimeclise/templates/")
-INSTALLED_APPS = (
+DJANGO_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -60,12 +60,22 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'django_facebook',
+    'django_facebook')
+
+GEZI_APPS = (
+    'gezimeclise.profiles',
+    'gezimeclise.blog')
+
+THIRDPARTY_APPS = (
     'south',
     'taggit',
-    'gezimeclise.profiles',
-    'taggit'
-)
+    'taggit',
+    'markitup')
+
+INSTALLED_APPS = (DJANGO_APPS +
+                  GEZI_APPS +
+                  THIRDPARTY_APPS)
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -92,3 +102,10 @@ LOGGING = {
 
 AUTH_USER_MODEL = 'profiles.GeziUser'
 PROFILE_IMAGE_PATH = os.path.join(MEDIA_ROOT,'facebook_profiles/%Y/%m/%d')
+
+MARKITUP_SET = 'markitup/sets/markdown'
+MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': False})
+
+BLOG_FEED_TITLE = "Gezi Meclise Blog"
+BLOG_FEED_DESCRIPTION = "Gezi Meclise Blog"
+BLOG_URL = "http://gezimeclise.org/blog/"

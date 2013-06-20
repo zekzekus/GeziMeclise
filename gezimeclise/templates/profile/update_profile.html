@@ -2,7 +2,13 @@
 {% block first_content %}
 <form class="form-horizontal" method="post">{% csrf_token %}
   <div class="control-group">
-{{ form }}
+      <div class="span6">
+
+          {% for i in form  %}
+              <div class="span3">
+          {{ i.label }}</div><div class="span3">{{ i }}</div>
+          {% endfor %}
+      </div>
 
   </div>
 

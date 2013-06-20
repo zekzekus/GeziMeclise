@@ -7,3 +7,5 @@ django-taggit==0.10a1
 django-taggit-templatetags==0.4.6dev
 django-templatetag-sugar==0.1
 wsgiref==0.1.2
+django-markitup
+markdown
