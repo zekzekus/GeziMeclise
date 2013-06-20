@@ -64,7 +64,9 @@ INSTALLED_APPS = (
     'south',
     'taggit',
     'gezimeclise.profiles',
-    'taggit'
+    'gezimeclise.blog',
+    'taggit',
+
 )
 LOGGING = {
     'version': 1,
@@ -92,3 +94,10 @@ LOGGING = {
 
 AUTH_USER_MODEL = 'profiles.GeziUser'
 PROFILE_IMAGE_PATH = os.path.join(MEDIA_ROOT,'facebook_profiles/%Y/%m/%d')
+
+MARKITUP_SET = 'markitup/sets/markdown'
+MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': False})
+
+BLOG_FEED_TITLE = "Gezi Meclise Blog"
+BLOG_FEED_DESCRIPTION = "Gezi Meclise Blog"
+BLOG_URL = "http://gezimeclise.org/blog/"
