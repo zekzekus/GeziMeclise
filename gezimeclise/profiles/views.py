@@ -49,8 +49,12 @@ class ProfileSupport(View):
             user = GeziUser.objects.get(username=username)
         except GeziUser.DoesNotExist:
             return HttpResponse("0")
-        if support == '+':
-            self.request.user.supports.add(user)
-        elif support == '-':
-            self.request.user.supports.remove(user)
-        return HttpResponse(support)
+        if not user == request.user:
+            if support == '+':
+                self.request.user.supports.add(user)
+            elif support == '-':
+                self.request.user.supports.remove(user)
+            return HttpResponse(support)
+        else:
+            # users cannot support themselves
+            return HttpResponse("0")

@@ -15,13 +15,15 @@
     <p>{{ object.supporters.all.count }} aday tarafından destekleniyor</p>
     <input class="username" type="hidden" data-username="{{ object.username }}">
 
-	<div id="id_div_unsupport" {% if not object in user.supports.all %}style="display:none"{% endif %}>
-	    Bu adayı destekliyorsun! 
-	    <a class="support" data-username="{{ object.username }}" data-support="-">desteğini çek</a>
-	</div>
-	<div id="id_div_support" {% if object in user.supports.all %}style="display:none"{% endif %}>
-	    <a class="btn support" id="btn_destek" data-username="{{ object.username }}" data-support="+">Beni temsil eder!</a>
-	</div>
+	{% if not user == object %}
+		<div id="id_div_unsupport" {% if not object in user.supports.all %}style="display:none"{% endif %}>
+		    Bu adayı destekliyorsun! 
+		    <a class="support" data-username="{{ object.username }}" data-support="-">desteğini çek</a>
+		</div>
+		<div id="id_div_support" {% if object in user.supports.all %}style="display:none"{% endif %}>
+		    <a class="btn support" id="btn_destek" data-username="{{ object.username }}" data-support="+">Beni temsil eder!</a>
+		</div>
+	{% endif %}
 
 {% endblock %}
 
