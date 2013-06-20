@@ -1,8 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponse
-from django.views import generic
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import View, ListView, DetailView, UpdateView
 from gezimeclise.profiles.models import GeziUser
 from gezimeclise.profiles.forms import ProfileUpdateForm
 
@@ -41,13 +40,17 @@ class ProfileUpdateView(UpdateView):
     def get_object(self,queryset=None):
         return self.request.user
 
-#TODO: Remove support and disable support button when already supported will be added. Will handled during Front end process
-class ProfilePostSupport(generic.View):
+
+class ProfileSupport(View):
     def post(self, request):
-        if self.request.method == "POST":
-            username = self.request.POST.get('username')
+        username = self.request.POST.get('username')
+        support = self.request.POST.get('support')
+        try:
             user = GeziUser.objects.get(username=username)
+        except GeziUser.DoesNotExist:
+            return HttpResponse("0")
+        if support == '+':
             self.request.user.supports.add(user)
-            return HttpResponse("ok")
-        else:
-            return HttpResponse("nok")
+        elif support == '-':
+            self.request.user.supports.remove(user)
+        return HttpResponse(support)

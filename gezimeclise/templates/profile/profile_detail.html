@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+
+
 {% block first_content %}
 
     <p><img src="{{ MEDIA_URL}}{{ object.image }}"></p>
@@ -9,25 +11,46 @@
     <p>{{ object.facebook_profile_url }}
     <p>{{ object.date_of_birth }}</p>
     <p>{{ object.website_url }}</p>
-    <p>Supports:{{object.supports.all|length }}</p>
+    <p>{{ object.supports.all.count }} adayı destekliyor</p>
+    <p>{{ object.supporters.all.count }} aday tarafından destekleniyor</p>
     <input class="username" type="hidden" data-username="{{ object.username }}">
-    <button class="btn destek">Destek Ol</button>
+
+	<div id="id_div_unsupport" {% if not object in user.supports.all %}style="display:none"{% endif %}>
+	    Bu adayı destekliyorsun! 
+	    <a class="support" data-username="{{ object.username }}" data-support="-">desteğini çek</a>
+	</div>
+	<div id="id_div_support" {% if object in user.supports.all %}style="display:none"{% endif %}>
+	    <a class="btn support" id="btn_destek" data-username="{{ object.username }}" data-support="+">Beni temsil eder!</a>
+	</div>
+
 {% endblock %}
+
+
 {% block footer %}
     <script>
     $(function () {
 
-
-        var username = $('.username').attr('data-username');
-    $('.destek').click(function(){
-        $.ajax({
-            url:"/profiles/support/",
-            type:"POST",
-            data:{"username":username, 'csrfmiddlewaretoken': '{{csrf_token}}'},
-            dataType:"json",
-            complete: function(){ }
-         })
-    })
+	    $('.support').click(function(){
+	    	var username = $(this).data('username');
+	    	var support = $(this).data('support');
+	        $.ajax({
+	            url:"{% url "profile_support" %}",
+	            type:"POST",
+	            data:{"username":username, 'csrfmiddlewaretoken': '{{csrf_token}}', "support": support},
+	            dataType:"json",
+	            complete: function(data){
+	            	if (data.responseText == '+') {
+		            	$('#id_div_support').hide();
+		            	$('#id_div_unsupport').show();
+	            	} else if (data.responseText == '-') {
+		            	$('#id_div_unsupport').hide();
+		            	$('#id_div_support').show();
+	            	} else if (data.responseText == '0') {
+		            	console.log(data);
+	            	}
+	            }
+	         })
+	    })
 
     });
     </script>
