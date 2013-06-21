@@ -7,7 +7,7 @@ from gezimeclise.blog.views import BlogDetailView, BlogIndexView, \
 urlpatterns = patterns('',
 
     # blog urls
-    url(r'^$', BlogIndexView.as_view(), name="blog"),
+    url(r'^$', BlogIndexView.as_view(), name="blog_index"),
     url(r'^(?P<slug>[-\w]+)/$', BlogDetailView.as_view(), name="blog_detail"),
 
     # rss & atom feed

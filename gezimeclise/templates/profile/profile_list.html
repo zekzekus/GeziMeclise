@@ -1,20 +1,22 @@
 {% extends "base.html" %}
 {% block first_content %}
-<form class="form-search">
-  <input type="text" class="input-medium search-query" name="q">
-  <button type="submit" class="btn">Ara</button>
-</form>
+	<form class="form-search">
+	  <input type="text" class="input-medium search-query" name="q">
+	  <button type="submit" class="btn">Ara</button>
+	</form>
+
     {% for object in object_list %}
-    {% if not object.is_superuser %}
-    <div class="span3">
-        <a href="{% url "profile_detail" object.username %}">
-        <img src="{{ MEDIA_URL}}{{object.image }}">
-        <p><b>{{object.first_name}} {{ object.last_name }}</b><p></a>
-        <p> destekleyenler : {{object.supports|length}}</p>
-        Tags:{% for tag in object.tags.all %}
-            <a id="tag" href="?tag={{tag.name}}">{{tag.name}}</a>
-             {% endfor %}
-    </div>
-{% endif %}
-{% endfor %}
+	    <div class="span3">
+	        <a href="{% url "profile_detail" object.username %}">
+		        <img src="{{ MEDIA_URL}}{{object.image }}">
+		        <br/>
+		        {{object.first_name}} {{ object.last_name }}
+		    </a>
+		    <p>{{ object.supports.all.count }} adayı destekliyor</p>
+		    <p>{{ object.supporters.all.count }} aday tarafından destekleniyor</p>
+	        {% for tag in object.tags.all %}
+	            <a class="label" href="?tag={{tag.name}}">{{tag.name}}</a>
+	        {% endfor %}
+	    </div>
+	{% endfor %}
 {% endblock %}
