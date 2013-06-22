@@ -38,7 +38,7 @@ class ProfileUpdateView(UpdateView):
     form_class = ProfileUpdateForm
     template_name = "profile/update_profile.html"
 
-    def get_object(self,queryset=None):
+    def get_object(self, queryset=None):
         return self.request.user
 
 

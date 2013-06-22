@@ -12,3 +12,4 @@ six==1.3.0
 wsgiref==0.1.2
 django-markitup
 markdown
+celery

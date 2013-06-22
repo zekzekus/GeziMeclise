@@ -14,10 +14,9 @@
     <button class="btn destek">Destek Ol</button>
 {% endblock %}
 {% block footer %}
+
     <script>
     $(function () {
-
-
         var username = $('.username').attr('data-username');
     $('.destek').click(function(){
         $.ajax({
@@ -28,7 +27,6 @@
             complete: function(){ }
          })
     })
-
     });
     </script>
 {% endblock %}

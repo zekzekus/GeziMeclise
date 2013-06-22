@@ -1,11 +1,24 @@
 from django.conf import settings
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic.detail import DetailView
+from gezimeclise.blog.forms import CreatePostForm
 
 from gezimeclise.blog.models import Post
 
+
+class BlogCreateView(CreateView):
+    template_name="blog/form.html"
+    model = Post
+    form_class = CreatePostForm
+
+class BlogUpdateView(UpdateView):
+    template_name="blog/form.html"
+    model = Post
+    form_class = CreatePostForm
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
 
 class BlogIndexView(ListView):
     template_name = "blog/index.html"

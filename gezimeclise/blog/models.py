@@ -1,3 +1,4 @@
+from gezimeclise.profiles.models import GeziUser
 from django.db import models
 from django.utils.encoding import smart_unicode
 from django.utils.translation import ugettext_lazy as _
@@ -18,6 +19,7 @@ class Post(models.Model):
     """
     Holds blog post data.
     """
+    publisher = models.ForeignKey(GeziUser, editable= False)
     title = models.CharField(_("Name"), max_length=255)
     slug = models.SlugField(_("Slug"), max_length=255, unique=True)
     content = MarkupField(_("Content"))
@@ -30,6 +32,11 @@ class Post(models.Model):
 
     class Meta:
         ordering = ("-date_created", )
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.publisher = self.request.user
+        return super(self,Post).save(force_insert=True, force_update=True)
 
     def __unicode__(self):
         return smart_unicode(self.title)
