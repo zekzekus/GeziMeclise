@@ -75,9 +75,21 @@
 
     <div class="masthead">
         <ul class="nav nav-pills pull-right">
-            <li class="active"><a href="#">Ana Sayfa</a></li>
-            <li><a href="#">Hakkında</a></li>
-            <li><a href="#">İletişim</a></li>
+            <li {% if request.path == '/' %}class="active"{% endif %}><a href="/">Ana Sayfa</a></li>
+            
+            {% url "profile_list" as url_profiles %}
+            {% with len_slice=url_profiles|length|stringformat:"s" %}
+            <li {% if request.path|slice:len_slice == url_profiles %}class="active"{% endif %}>
+            	<a href="{{ url_profiles }}">Profiller</a>
+            </li>
+            {% endwith %}
+
+            {% url "blog_index" as url_blog %}
+            {% with len_slice=url_blog|length|stringformat:"s" %}
+            <li {% if request.path|slice:len_slice == url_blog %}class="active"{% endif %}>
+            	<a href="{{ url_blog }}">Blog</a>
+            </li>
+            {% endwith %}
         </ul>
         <h3 class="muted">Gezi Meclis'e</h3>
     </div>
