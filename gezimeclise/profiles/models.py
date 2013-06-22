@@ -1,4 +1,4 @@
-#coding:utf-8
+# coding: utf-8
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -14,6 +14,7 @@ class Region(models.Model):
 
     def __unicode__(self):
         return self.name
+
 
 class GeziUser(AbstractUser, FacebookModel):
     supports = models.ManyToManyField('self', blank=True, symmetrical=False,
@@ -32,9 +33,9 @@ class GeziUser(AbstractUser, FacebookModel):
 
 
 @receiver(post_save, sender=GeziUser)
-def new_friend_notification_handler(sender, **kwargs):
+def new_friend_notification_handler(sender, instance, **kwargs):
     from gezimeclise.notifications.models import Notification
     if kwargs['created']:
-        for friend in sender.get_registered_friends():
+        for friend in instance.get_registered_friends():
             Notification.objects.create(sender=sender, receiver=friend,
                                         notification="supported")
