@@ -70,7 +70,7 @@ GEZI_APPS = (
     'gezimeclise.notifications')
 
 THIRDPARTY_APPS = (
-    # 'south',
+    'south',
     'taggit',
     'taggit',
     'markitup',
