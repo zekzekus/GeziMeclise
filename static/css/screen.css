@@ -89,3 +89,15 @@ body {
         margin-top: 40px;
         padding: 10px 20px;
     }
+
+/* Blog */
+
+.post header time {
+    font-size: 20px;
+    color: gray;
+    display: block;
+}
+
+.post header h3 {
+    margin-top: 0;
+}

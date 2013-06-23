@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block first_content %}
+    <section class="content">
+        {% include "blog/post.html" %}
+    </section>
+{% endblock %}
