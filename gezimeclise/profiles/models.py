@@ -21,7 +21,7 @@ class GeziUser(AbstractUser, FacebookModel):
                                       related_name='supporters')
     causes = models.TextField(blank=True, null=True)
     tags = TaggableManager(blank=True)
-    region = models.ForeignKey(Region, null=True)
+    region = models.ForeignKey(Region, blank=True, null=True)
     objects = UserManager()
 
     def get_facebook_friends(self):
