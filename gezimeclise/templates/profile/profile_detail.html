@@ -3,33 +3,67 @@
 
 {% block first_content %}
 
-    <p><img src="{{ MEDIA_URL}}{{ object.image }}"></p>
-    <p>{{ object.first_name }} {{ object.last_name }}</p>
-    <p>{{ object.about_me  }}</p>
-    <p>{{ object.website_url }}</p>
-    <p>{{ object.blog_url }}</p>
-    <p>{{ object.facebook_profile_url }}
-    <p>{{ object.date_of_birth }}</p>
-    <p>{{ object.website_url }}</p>
-    <p>{{ object.supports.all.count }} adayı destekliyor</p>
-    <p>{{ object.supporters.all.count }} aday tarafından destekleniyor</p>
-    
-    <p>
-		{% for tag in object.tags.all %}
-			<a class="label" href="{% url "profile_list" %}?tag={{tag.name}}">{{tag.name}}</a>
-		{% endfor %}
-    </p>
-    <input class="username" type="hidden" data-username="{{ object.username }}">
 
-	{% if not user == object %}
-		<div id="id_div_unsupport" {% if not object in user.supports.all %}style="display:none"{% endif %}>
-		    Bu adayı destekliyorsun! 
-		    <a class="support" data-username="{{ object.username }}" data-support="-">desteğini çek</a>
-		</div>
-		<div id="id_div_support" {% if object in user.supports.all %}style="display:none"{% endif %}>
-		    <a class="btn support" id="btn_destek" data-username="{{ object.username }}" data-support="+">Beni temsil eder!</a>
-		</div>
-	{% endif %}
+    <div class="row">
+        <div class="span2 profile-info">
+            <h3>{{ object.first_name }} {{ object.last_name }}</h3>
+            <p><img src="{{ MEDIA_URL}}{{ object.image }}"></p>
+        </div>
+
+        <div class="span5 profile-detail">
+            <p class="count">
+                <strong>{{ object.supports.all.count }}</strong>
+                desteklediği
+            </p>
+            <p class="count">
+                <strong>{{ object.supporters.all.count }}</strong>
+                destekleyen
+            </p>
+
+            {% if user != object and user.is_authenticated %}
+                <input class="username" type="hidden" data-username="{{ object.username }}">
+
+                <div class="support-action" id="id_div_unsupport" {% if not object in user.supports.all %}style="display:none"{% endif %}>
+                    Bu adayı destekliyorsun!
+                    <a class="support" data-username="{{ object.username }}" data-support="-">Desteğimi çekmek istiyorum.</a>
+                </div>
+                <div class="support-action" id="id_div_support" {% if object in user.supports.all %}style="display:none"{% endif %}>
+                    <a class="btn support" id="btn_destek" data-username="{{ object.username }}" data-support="+">Beni temsil eder, destekliyorum!</a>
+                </div>
+            {% endif %}
+
+            {% if object.about_me %}
+                <h3>Hakkında</h3>
+                <p>{{ object.about_me  }}</p>
+            {% endif %}
+
+            <h3>Bağlantılar</h3>
+            {% if object.website_url %}
+                <p>
+                Web Sayfası <br>
+                <a href="{{ object.website_url }}">{{ object.website_url }}</a></p>
+            {% endif %}
+            {% if object.blog_url %}
+                <p>
+                Web Günlüğü <br>
+                <a href="{{ object.blog_url }}">{{ object.blog_url }}</a></p>
+            {% endif %}
+
+            {% if object.facebook_profile_url %}
+                <p>
+                Facebook Profili <br>
+                <a href="{{ object.facebook_profile_url }}">{{ object.facebook_profile_url }}</a>
+                </p>
+            {% endif %}
+            <p>
+                {% for tag in object.tags.all %}
+                    <a class="label" href="{% url "profile_list" %}?tag={{tag.name}}">{{tag.name}}</a>
+                {% endfor %}
+            </p>
+
+        </div>
+    </div>
+
 
 {% endblock %}
 

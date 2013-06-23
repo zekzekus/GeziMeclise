@@ -6,17 +6,22 @@
 	</form>
 
     {% for object in object_list %}
-	    <div class="span3">
-	        <a href="{% url "profile_detail" object.username %}">
-		        <img src="{{ MEDIA_URL}}{{object.image }}">
-		        <br/>
-		        {{object.first_name}} {{ object.last_name }}
-		    </a>
-		    <p>{{ object.supports.all.count }} adayı destekliyor</p>
-		    <p>{{ object.supporters.all.count }} aday tarafından destekleniyor</p>
-	        {% for tag in object.tags.all %}
-	            <a class="label" href="?tag={{tag.name}}">{{tag.name}}</a>
-	        {% endfor %}
-	    </div>
+        <div class="span2 profile-column">
+            <a href="{% url "profile_detail" object.username %}">
+                {% if object.image %}
+                    <img src="{{ object.image.url }}">
+                {% endif %}
+                <br/>
+                {{ object.get_full_name }}
+            </a>
+            <p>{{ object.supports.all.count }} desteklediği aday ve
+                {{ object.supporters.all.count }} destekçisi var.</p>
+            {% for tag in object.tags.all %}
+                <a class="label" href="?tag={{tag.name}}">{{tag.name}}</a>
+            {% endfor %}
+        </div>
 	{% endfor %}
+
+    <div class="clearfix"></div>
+
 {% endblock %}

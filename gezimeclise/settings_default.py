@@ -103,7 +103,7 @@ LOGGING = {
 
 AUTH_USER_MODEL = 'profiles.GeziUser'
 
-FACEBOOK_PROFILE_IMAGE_PATH = os.path.join(MEDIA_ROOT,'facebook_profiles/%Y/%m/%d')
+FACEBOOK_PROFILE_IMAGE_PATH = 'facebook_profiles/%Y/%m/%d'
 FACEBOOK_STORE_FRIENDS = True
 FACEBOOK_STORE_LIKES = True
 FACEBOOK_FORCE_PROFILE_UPDATE_ON_LOGIN = True
