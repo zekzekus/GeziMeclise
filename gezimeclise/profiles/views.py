@@ -1,9 +1,9 @@
-from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponse
-from django.views.generic import View, ListView, DetailView, UpdateView
-from gezimeclise.profiles.models import GeziUser
-from gezimeclise.profiles.forms import ProfileUpdateForm
+from django.views.generic import View, ListView, DetailView, UpdateView,\
+    FormView
+from gezimeclise.profiles.models import GeziUser, Report
+from gezimeclise.profiles.forms import ProfileUpdateForm, ReportForm
 
 
 class ProfileListView(ListView):
@@ -39,6 +39,19 @@ class ProfileUpdateView(UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+class ReportCreateView(FormView):
+    model = Report
+    success_url = "/"
+    form_class = ReportForm
+    template_name="profile/report.html"
+
+    def form_valid(self, form):
+        form = form.save(commit=False)
+        form.reporter = self.request.user
+        form.save()
+        return HttpResponse(self.success_url)
 
 
 class ProfileSupport(View):

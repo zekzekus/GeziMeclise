@@ -52,6 +52,8 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'gezimeclise.urls'
 WSGI_APPLICATION = 'gezimeclise.wsgi.application'
 TEMPLATE_DIRS = (PROJECT_PATH + "/gezimeclise/templates/")
+
+#APPS
 DJANGO_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -68,15 +70,18 @@ GEZI_APPS = (
     'gezimeclise.notifications')
 
 THIRDPARTY_APPS = (
-    'south',
+    # 'south',
     'taggit',
     'taggit',
-    'markitup')
+    'markitup',
+    'celery',
+    'djcelery',)
 
 INSTALLED_APPS = (DJANGO_APPS +
                   GEZI_APPS +
                   THIRDPARTY_APPS)
 
+#LOGGING
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -101,16 +106,27 @@ LOGGING = {
     }
 }
 
+#DJANGO-FACEBOOK SETTINGS
 AUTH_USER_MODEL = 'profiles.GeziUser'
-
 FACEBOOK_PROFILE_IMAGE_PATH = os.path.join(MEDIA_ROOT,'facebook_profiles/%Y/%m/%d')
 FACEBOOK_STORE_FRIENDS = True
 FACEBOOK_STORE_LIKES = True
 FACEBOOK_FORCE_PROFILE_UPDATE_ON_LOGIN = True
 
+#FACEBOOK USERS TO BE GOTTEN BY CELERY
+# FACEBOOK_CELERY_TOKEN_EXTEND = True
+# FACEBOOK_CELERY_STORE = True
+
+#MARKITUP
 MARKITUP_SET = 'markitup/sets/markdown'
 MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': False})
 
+#BLOG
 BLOG_FEED_TITLE = "Gezi Meclise Blog"
 BLOG_FEED_DESCRIPTION = "Gezi Meclise Blog"
 BLOG_URL = "http://gezimeclise.org/blog/"
+
+#CELERY
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = 'amqp://guest:guest@localhost:5672//'
