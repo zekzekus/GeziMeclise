@@ -12,6 +12,8 @@ django-facebook==5.2.6
 django-markitup==1.0.0
 django-shell-plus==1.1.5
 django-taggit==0.10a1
+ipdb==0.7
+ipython==0.13.2
 kombu==2.5.10
 python-dateutil==2.1
 pytz==2013b
