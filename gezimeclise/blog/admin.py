@@ -13,6 +13,10 @@ class PostAdmin(admin.ModelAdmin):
         "slug": ("title", )
     }
 
+    def save_model(self, request, obj, form, change):
+        obj.user = request.user
+        super(PostAdmin, self).save_model(request, obj, form, change)
+
     def publish(self, request, qs):
         qs.update(is_published=True)
     publish.short_description = _("Publish selected posts")

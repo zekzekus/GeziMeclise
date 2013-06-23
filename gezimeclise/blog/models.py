@@ -33,11 +33,6 @@ class Post(models.Model):
     class Meta:
         ordering = ("-date_created", )
 
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
-        self.publisher = self.request.user
-        return super(self,Post).save(force_insert=True, force_update=True)
-
     def __unicode__(self):
         return smart_unicode(self.title)
 
