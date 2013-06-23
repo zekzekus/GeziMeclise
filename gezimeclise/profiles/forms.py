@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from gezimeclise.profiles.models import GeziUser
+from gezimeclise.profiles.models import GeziUser, Report
 
 
 class ProfileUpdateForm(ModelForm):
@@ -13,3 +13,8 @@ class ProfileUpdateForm(ModelForm):
                    'password', 'last_login', 'facebook_id', 'raw_data']
 
 
+class ReportForm(ModelForm):
+
+    class Meta:
+        model = Report
+        fields = ['reported', 'topic']

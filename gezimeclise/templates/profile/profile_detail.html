@@ -17,20 +17,17 @@
             </p>
             <p class="count">
                 <strong>{{ object.supporters.all.count }}</strong>
-                destekleyen
-            </p>
+                destek
+			<a class="label" href="{% url "profile_list" %}?tag={{tag.name}}">{{tag.name}}</a>
+			<input class="username" type="hidden" data-username="{{ object.username }}">
 
-            {% if user != object and user.is_authenticated %}
-                <input class="username" type="hidden" data-username="{{ object.username }}">
-
-                <div class="support-action" id="id_div_unsupport" {% if not object in user.supports.all %}style="display:none"{% endif %}>
-                    Bu adayı destekliyorsun!
-                    <a class="support" data-username="{{ object.username }}" data-support="-">Desteğimi çekmek istiyorum.</a>
-                </div>
-                <div class="support-action" id="id_div_support" {% if object in user.supports.all %}style="display:none"{% endif %}>
-                    <a class="btn support" id="btn_destek" data-username="{{ object.username }}" data-support="+">Beni temsil eder, destekliyorum!</a>
-                </div>
-            {% endif %}
+            <div class="support-action" id="id_div_unsupport" {% if not object in user.supports.all %}style="display:none"{% endif %}>
+                Bu adayı destekliyorsun!
+                <a class="support" data-username="{{ object.username }}" data-support="-">Desteğimi çekmek istiyorum.</a>
+            </div>
+            <div class="support-action" id="id_div_support" {% if object in user.supports.all %}style="display:none"{% endif %}>
+                <a class="btn support" id="btn_destek" data-username="{{ object.username }}" data-support="+">Beni temsil eder, destekliyorum!</a>
+            </div>
 
             {% if object.about_me %}
                 <h3>Hakkında</h3>

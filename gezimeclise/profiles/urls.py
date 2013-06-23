@@ -5,12 +5,8 @@ from gezimeclise.profiles.views import (ProfileListView,
                                         ProfileSupport)
 
 urlpatterns = patterns('',
-                       url(r'^$', ProfileListView.as_view(),
-                           name="profile_list"),
-                       url(r'^get/(?P<username>[-\w]+)/$',
-                           ProfileDetailView.as_view(),
-                           name="profile_detail"),
-                       url(r'^update/$',
-                           ProfileUpdateView.as_view()),
-                       url(r'^support/$', ProfileSupport.as_view(),
-                           name="profile_support"),)
+   url(r'^$', ProfileListView.as_view(), name="profile_list"),
+   url(r'^(?P<username>[-\w]+)/$', ProfileDetailView.as_view(), name="profile_detail"),
+   url(r'^update/$', ProfileUpdateView.as_view()),
+   url(r'^support/$', ProfileSupport.as_view(), name="profile_support"),
+)

@@ -7,6 +7,9 @@ from django.contrib.auth.models import AbstractUser, UserManager
 from taggit.managers import TaggableManager
 from django_facebook.models import FacebookUser
 
+REPORTTOPICS = ((1, "FAKE ACCOUNT"),
+                (2, "BAD LANGUAGE")),
+
 
 class Region(models.Model):
     name = models.CharField(max_length=255)
@@ -30,6 +33,21 @@ class GeziUser(AbstractUser, FacebookModel):
     def get_registered_friends(self):
         return GeziUser.objects.filter(id__in=FacebookUser.objects.filter(
             user_id=self.id).values('user_id')).exclude(id=self.id)
+
+
+class Report(models.Model):
+    reporter = models.ForeignKey(GeziUser, related_name="reporter")
+    reported = models.ForeignKey(GeziUser, related_name="reported")
+    topic = models.IntegerField(choices=REPORTTOPICS)
+
+    class Meta:
+        unique_together = ('reporter', 'reported', 'topic')
+    def __unicode__(self):
+        return str(self.reporter + self.reported + self.topic)
+
+    def deactivate_user(self):
+        self.reporter.is_active=False
+        self.reporter.save()
 
 
 @receiver(post_save, sender=GeziUser)
