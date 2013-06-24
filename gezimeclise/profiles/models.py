@@ -6,6 +6,9 @@ from django_facebook.models import FacebookModel
 from django.contrib.auth.models import AbstractUser, UserManager
 from taggit.managers import TaggableManager
 from django_facebook.models import FacebookUser
+from django_facebook.api import get_facebook_graph, FacebookUserConverter
+from django_facebook.signals import facebook_post_store_friends
+
 
 REPORTTOPICS = ((1, "FAKE ACCOUNT"),
                 (2, "BAD LANGUAGE")),
@@ -31,8 +34,9 @@ class GeziUser(AbstractUser, FacebookModel):
         return FacebookUser.objects.filter(user_id=self.id).values('user_id')
 
     def get_registered_friends(self):
-        return GeziUser.objects.filter(id__in=FacebookUser.objects.filter(
-            user_id=self.id).values('user_id')).exclude(id=self.id)
+        return GeziUser.objects.filter(
+            facebook_id__in=FacebookUser.objects.filter(user_id=self.id).values_list('facebook_id', flat=True)
+        )
 
 
 class Report(models.Model):
@@ -42,6 +46,7 @@ class Report(models.Model):
 
     class Meta:
         unique_together = ('reporter', 'reported', 'topic')
+
     def __unicode__(self):
         return str(self.reporter + self.reported + self.topic)
 
@@ -50,10 +55,9 @@ class Report(models.Model):
         self.reporter.save()
 
 
-@receiver(post_save, sender=GeziUser)
-def new_friend_notification_handler(sender, instance, **kwargs):
-    from gezimeclise.notifications.models import Notification
-    if kwargs['created']:
-        for friend in instance.get_registered_friends():
-            Notification.objects.create(sender=sender, receiver=friend,
-                                        notification="supported")
+def new_friend_notification_handler(sender, user, friends, current_friends, inserted_friends, **kwargs):
+    from gezimeclise.notifications.models import Notification, NOTIFICATIONS_TYPE_NEW_USER
+    registered_friends = user.get_registered_friends()
+    for friend in registered_friends:
+        Notification.objects.create(sender=user, receiver=friend, notification=NOTIFICATIONS_TYPE_NEW_USER)
+facebook_post_store_friends.connect(new_friend_notification_handler)

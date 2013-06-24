@@ -25,8 +25,8 @@ class NotificationManager(models.Manager):
 
 
 class Notification(models.Model):
-    sender = models.ForeignKey(GeziUser, related_name="sender")
-    receiver = models.ForeignKey(GeziUser, related_name="receiver")
+    sender = models.ForeignKey(GeziUser, related_name="sent_notifications")
+    receiver = models.ForeignKey(GeziUser, related_name="received_notifications")
     notification = models.IntegerField(choices=NOTIFICATIONS_CHOICES)
     read = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True)
