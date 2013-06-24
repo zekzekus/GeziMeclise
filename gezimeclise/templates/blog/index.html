@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
 {% block first_content %}
+    <button class="btn new_blog"><a href="{% url 'blog_create' %}">Yeni Yazı</a></button>
+     <h3> Blog Yazıları </h3>
     <section class="content">
         {% for post in posts %}
             {% include "blog/post.html" %}
-        {%  endfor %}
+        {% endfor %}
         {% include "blog/pagination.html" %}
         <hr>
     </section>

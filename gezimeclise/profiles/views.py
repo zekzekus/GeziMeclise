@@ -6,6 +6,15 @@ from gezimeclise.profiles.models import GeziUser, Report
 from gezimeclise.profiles.forms import ProfileUpdateForm, ReportForm
 
 
+class FriendsListView(ListView):
+    model = GeziUser
+    paginate_by = 15
+    template_name="profile/friends_list.html"
+
+    def get_queryset(self):
+        return self.model.get_friends(self.request.user)
+
+
 class ProfileListView(ListView):
     model = GeziUser
     paginate_by = 15

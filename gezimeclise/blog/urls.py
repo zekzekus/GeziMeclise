@@ -12,7 +12,6 @@ urlpatterns = patterns('',
     url(r'^blog/(?P<slug>[-\w]+)/$', BlogDetailView.as_view(), name="blog_detail"),
     url(r'^update/(?P<slug>[-\w]+)/$', BlogUpdateView.as_view(),name="blog_update"),
     url(r'^create/$', BlogCreateView.as_view(),name="blog_create"),
-    url(r'^$', BlogIndexView.as_view(), name="blog_index"),
     url(r'^(?P<slug>[-\w]+)/$', BlogDetailView.as_view(), name="blog_detail"),
 
 

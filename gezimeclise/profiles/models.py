@@ -35,9 +35,14 @@ class GeziUser(AbstractUser, FacebookModel):
 
     def get_registered_friends(self):
         return GeziUser.objects.filter(
-            facebook_id__in=FacebookUser.objects.filter(user_id=self.id).values_list('facebook_id', flat=True)
+            facebook_id__in=FacebookUser.objects.filter(
+                user_id=self.id).values_list('facebook_id', flat=True)
         )
 
+    def get_friends(self):
+        return GeziUser.objects.filter\
+                (facebook_id__in=FacebookUser.objects.filter(
+                user_id=self.id))
 
 class Report(models.Model):
     reporter = models.ForeignKey(GeziUser, related_name="reporter")

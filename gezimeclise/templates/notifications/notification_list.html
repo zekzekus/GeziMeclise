@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+    {% block first_content %}
+        {% for i in notification_list %}
+            {{ i.reported }}
+            {{ i.reporter }}
+        {% endfor %}
+    {% endblock %}

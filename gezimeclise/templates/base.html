@@ -38,14 +38,33 @@
 
     <div class="masthead">
         <ul class="nav nav-pills pull-right">
+
             <li {% if request.path == '/' %}class="active"{% endif %}><a href="/">Ana Sayfa</a></li>
-            
+
             {% url "profile_list" as url_profiles %}
             {% with len_slice=url_profiles|length|stringformat:"s" %}
             <li {% if request.path|slice:len_slice == url_profiles %}class="active"{% endif %}>
             	<a href="{{ url_profiles }}">Profiller</a>
             </li>
             {% endwith %}
+
+            {% if user.is_authenticated %}
+            {% url "friends_list" as url_friends_list %}
+            {% with len_slice=url_friends_list|length|stringformat:"s" %}
+            <li {% if request.path|slice:len_slice == url_friends_list %}class="active"{% endif %}>
+                <a href="{{ url_friends_list }}">Arkadaşlar</a>
+            </li>
+            {% endwith %}
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            {% url "notifications" as url_notifications %}
+            {% with len_slice=url_notifications|length|stringformat:"s" %}
+            <li {% if request.path|slice:len_slice == url_notifications %}class="active"{% endif %}>
+                <a href="{{ url_notifications }}">Bildirimler</a>
+            </li>
+            {% endwith %}
+            {% endif %}
 
             {% url "blog_index" as url_blog %}
             {% with len_slice=url_blog|length|stringformat:"s" %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block first_content %}
+	<form class="form-search">
+	  <input type="text" class="input-medium search-query" name="q">
+	  <button type="submit" class="btn">Ara</button>
+	</form>
+
+    {% for object in object_list %}
+        {{object}}
+        <div class="span2 profile-column">
+            <a href="{% if object.username %}{% url 'profile_detail' object.username %}{% endif %}">
+                {% if object.image %}
+                    <img src="{{ object.image.url }}">
+                {% endif %}
+                <br/>
+                {{ object.get_full_name }}
+            </a>
+            <p>{{ object.supports.all.count }} desteklediği aday ve
+                {{ object.supporters.all.count }} destekçisi var.</p>
+            {% for tag in object.tags.all %}
+                <a class="label" href="?tag={{tag.name}}">{{tag.name}}</a>
+            {% endfor %}
+        </div>
+	{% endfor %}
+
+    <div class="clearfix"></div>
+
+{% endblock %}

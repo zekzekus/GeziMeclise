@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load markitup_tags %}
+{% markitup_media %}
+{% block first_content %}
+{{ form.media }}
+
+<form class="form-horizontal" action="{% url 'blog' %}" method="post">{% csrf_token %}
+  <div class="control-group">
+      <div class="span6">
+          <h4> Başlık </h4>
+          <p>{{form.title}}</p>
+          <h4> Yazı </h4>
+          <p>{{form.content}}</p>
+          {% markitup_editor form.content.auto_id %}
+      </div>
+  </div>
+<button type="submit" class="btn">Kaydet</button>
+ </form>
+
+
+
+{% endblock %}
