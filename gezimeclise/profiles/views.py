@@ -43,6 +43,8 @@ class ProfileDetailView(DetailView):
 class ProfileUpdateView(UpdateView):
     model = GeziUser
     success_url = "/"
+    slug_field = "username"
+    slug_url_kwarg = "username"
     form_class = ProfileUpdateForm
     template_name = "profile/update_profile.html"
 

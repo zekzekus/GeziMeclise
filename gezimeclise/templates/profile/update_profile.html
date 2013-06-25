@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block first_content %}
-<form class="form-horizontal" method="post">{% csrf_token %}
+<form class="form-horizontal" action="{% url 'profile_update' %}" method="post">{% csrf_token %}
   <div class="control-group">
       <div class="span6">
 
