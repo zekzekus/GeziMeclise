@@ -4,15 +4,57 @@
   <div class="control-group">
       <div class="span6">
 
-          {% for i in form  %}
   <div class="control-group">
-    <label class="control-label"><h5>{{ i.label }}</h5></label>
+    <label class="control-label"><h5>Adı</h5></label>
     <div class="controls">
-      {{i}}
+      {{form.first_name}}
     </div>
   </div>
-          {% endfor %}
-      </div>
+  <div class="control-group">
+    <label class="control-label"><h5>Soyadı</h5></label>
+    <div class="controls">
+      {{form.last_name}}
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label"><h5>E-posta</h5></label>
+    <div class="controls">
+      {{form.email}}
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label"><h5>Hakkımda</h5></label>
+    <div class="controls">
+      {{form.about_me}}
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label"><h5>Blog Adresim</h5></label>
+    <div class="controls">
+      {{form.blog_url}}
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label"><h5>Hedeflerim</h5></label>
+    <div class="controls">
+      {{form.causes}}
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label"><h5>Bölgem</h5></label>
+    <div class="controls">
+      {{form.region}}
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label"><h5>Etiketler</h5></label>
+    <div class="controls">
+      {{form.tags}}
+    </div>
+  </div>
+
+  </div>
 
   </div>
 
@@ -22,4 +64,12 @@
     <button class="btn" onclick="sendRequestViaMultiFriendSelector(); return false;"
       value="Send Request">Arkadaşlarını davet et</button>
     </p>
+{% endblock %}
+
+{% block footer %}
+<script src="{{STATIC_URL}}js/jquery.tagsinput.js"></script>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}js/jquery.tagsinput.css" />
+<script>
+$('#id_tags').tagsInput();
+</script>
 {% endblock %}
