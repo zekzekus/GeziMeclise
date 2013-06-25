@@ -44,7 +44,7 @@
             {% url "profile_list" as url_profiles %}
             {% with len_slice=url_profiles|length|stringformat:"s" %}
             <li {% if request.get_full_path == url_profiles %}class="active"{% endif %}>
-            	<a href="{{ url_profiles }}">Profiller</a>
+            	<a href="{{ url_profiles }}">Kullanıcılar</a>
             </li>
             {% endwith %}
 
@@ -61,7 +61,7 @@
             {% url "blog" as url_blog %}
             {% with len_slice=url_blog|length|stringformat:"s" %}
             <li {% if request.get_full_path == url_blog %}class="active"{% endif %}>
-            	<a href="{{ url_blog }}">Blog</a>
+            	<a href="{{ url_blog }}">Günlük</a>
             </li>
             {% endwith %}
 

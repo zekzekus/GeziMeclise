@@ -7,7 +7,7 @@ class ProfileUpdateForm(ModelForm):
     class Meta:
         model = GeziUser
         fields = ['first_name', 'last_name', 'email', 'image',
-                  'about_me', 'blog_url', 'causes', 'region', 'tags']
+                  'about_me', 'blog_url', 'causes', 'region', 'tags', 'twitter']
 
 
 class ReportForm(ModelForm):
