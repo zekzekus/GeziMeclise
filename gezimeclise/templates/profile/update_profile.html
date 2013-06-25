@@ -5,8 +5,12 @@
       <div class="span6">
 
           {% for i in form  %}
-              <div class="span3">
-          {{ i.label }}</div><div class="span3">{{ i }}</div>
+  <div class="control-group">
+    <label class="control-label"><h5>{{ i.label }}</h5></label>
+    <div class="controls">
+      {{i}}
+    </div>
+  </div>
           {% endfor %}
       </div>
 
