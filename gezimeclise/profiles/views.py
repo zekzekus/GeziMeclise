@@ -54,7 +54,7 @@ class ReportCreateView(FormView):
     model = Report
     success_url = "/"
     form_class = ReportForm
-    template_name="profile/report.html"
+    template_name = "profile/report.html"
 
     def form_valid(self, form):
         form = form.save(commit=False)

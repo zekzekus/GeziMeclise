@@ -4,7 +4,7 @@
 {% block first_content %}
 {{ form.media }}
 
-<form class="form-horizontal" action="{% url 'blog' %}" method="post">{% csrf_token %}
+<form class="form-horizontal" action="{% url 'blog_create' %}" method="post">{% csrf_token %}
   <div class="control-group">
       <div class="span6">
           <h4> Başlık </h4>

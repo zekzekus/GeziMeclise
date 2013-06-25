@@ -44,6 +44,7 @@ class GeziUser(AbstractUser, FacebookModel):
                 (facebook_id__in=FacebookUser.objects.filter(
                 user_id=self.id))
 
+
 class Report(models.Model):
     reporter = models.ForeignKey(GeziUser, related_name="reporter")
     reported = models.ForeignKey(GeziUser, related_name="reported")

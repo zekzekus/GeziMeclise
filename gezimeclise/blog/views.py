@@ -2,23 +2,25 @@ from django.conf import settings
 from django.contrib.syndication.views import Feed
 from django.http import HttpResponse
 from django.utils.feedgenerator import Atom1Feed
-from django.views.generic import ListView, CreateView, UpdateView, FormView
+from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic.detail import DetailView
 from gezimeclise.blog.forms import CreatePostForm
 from gezimeclise.blog.models import Post
 
 
-class BlogCreateView(FormView):
+class BlogCreateView(CreateView):
     template_name = "blog/form.html"
     model = Post
     form_class = CreatePostForm
     context_object_name = "form"
+    success_url = "/"
 
     def form_valid(self, form):
         form = form.save(commit=False)
         form.publisher = self.request.user
         form.save()
         return HttpResponse(self.success_url)
+
 
 class BlogUpdateView(UpdateView):
     template_name = "blog/form.html"
