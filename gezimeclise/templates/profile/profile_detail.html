@@ -20,19 +20,20 @@
 	    <div class="row">
 	        <div class="span2 profile-info">
 	            <p><img src="{{ MEDIA_URL}}{{ object.image }}"></p>
+                <p class="count">
+                    <strong>{{ object.supports.all.count }}</strong>
+                    desteklediği
+                </p>
+                <p class="count">
+                    <strong>{{ object.supporters.all.count }}</strong>
+                    destek
 	        </div>
-	
+
 	        <div class="span6 profile-detail">
-	            <p class="count">
-	                <strong>{{ object.supports.all.count }}</strong>
-	                desteklediği
-	            </p>
-	            <p class="count">
-	                <strong>{{ object.supporters.all.count }}</strong>
-	                destek
+
 				<a class="label" href="{% url "profile_list" %}?tag={{tag.name}}">{{tag.name}}</a>
 				<input class="username" type="hidden" data-username="{{ object.username }}">
-	
+
 				{% if not request.user == object %}
 	            <div class="support-action" id="id_div_unsupport" {% if not object in user.supports.all %}style="display:none"{% endif %}>
 	                Bu adayı destekliyorsun!
@@ -42,7 +43,7 @@
 	                <a class="btn support" id="btn_destek" data-username="{{ object.username }}" data-support="+">Beni temsil eder, destekliyorum!</a>
 	            </div>
 	            {% endif %}
-	
+
 	            {% if object.about_me %}
 	                <h3>Hakkında</h3>
 	                <p>{{ object.about_me  }}</p>
@@ -67,7 +68,7 @@
 	                Web Günlüğü <br>
 	                <a href="{{ object.blog_url }}">{{ object.blog_url }}</a></p>
 	            {% endif %}
-	
+
 	            {% if object.facebook_profile_url %}
 	                <p>
 	                Facebook Profili <br>
@@ -80,14 +81,14 @@
 	                {% endfor %}
 	            </p>
 	        </div>
-	        
+
 	        <div class="span4">
 	            {% if object.twitter %}
 					<a class="twitter-timeline" href="https://twitter.com/search?q={{ object.twitter }}" data-widget-id="349652703581962244">@{{ object.twitter }}</a>
 					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 				{% endif %}
 	        </div>
-	        
+
 	    </div>
 
 </section>

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% block first_content %}
+{% block content %}
+<p><h4>Profilini Güncelle</h4></p>
 <form class="form-horizontal" action="{% url 'profile_update' %}" method="post">{% csrf_token %}
   <div class="control-group">
       <div class="span6">

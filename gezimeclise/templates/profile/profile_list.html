@@ -13,8 +13,7 @@
                 <br/>
                 {{ object.get_full_name }}
             </a>
-            <p>{{ object.supports.all.count }} desteklediği aday ve
-                {{ object.supporters.all.count }} destekçisi var.</p>
+
             {% for tag in object.tags.all %}
                 <a class="label" href="?tag={{tag.name}}">{{tag.name}}</a>
             {% endfor %}
@@ -27,7 +26,7 @@
 <section id="discover_title">
 
     {% with request.GET.q as query %}
-    
+
      <div class="hgroup">
         <div class="row">
            <div class="{% if domain_user %}span8{% else %}span9{% endif %}">
@@ -61,7 +60,7 @@
            {% endif %}
 
         </div>
-         
+
      </div>
      {% endwith %}
 </section>
@@ -72,7 +71,7 @@
     <div class="span9">
 
 		{% if object_list %}
-		
+
 		<div class="portfolio_strict row" id="content_container" style="overflow:visible !important">
 		  {% for user in object_list %}
 		    <div class="portfolio_item span3">
@@ -92,14 +91,14 @@
 		    </div>
 		  {% endfor %}
 		</div>
-		
+
 		{% else %}
-		
+
 		<div class="alert alert-block">
 		  <h3>Kimseyi bulamadık</h3>
 		  Bu kriterlere uygun aday yok!
 		</div>
-		
+
 		{% endif %}
 
     </div>
@@ -132,16 +131,16 @@
     $(function(){
 
       var $container = $('#content_container');
-    
+
       $container.isotope({
         itemSelector : '.portfolio_item',
         animationOptions: {
              queue: false
         }
       });
-      
+
       $container.infinitescroll({
-        navSelector  : '.pagination',    // selector for the paged navigation 
+        navSelector  : '.pagination',    // selector for the paged navigation
         nextSelector : '.pagination a.next',  // selector for the NEXT link (to page 2)
         itemSelector : '.portfolio_item',     // selector for all items you'll retrieve
         loading: {
@@ -156,9 +155,8 @@
           $container.isotope( 'appended', $( newElements ) );
         }
       );
-      
+
     });
   </script>
 
 {% endblock %}
-  

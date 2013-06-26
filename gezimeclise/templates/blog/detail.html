@@ -2,13 +2,11 @@
 
 {% block title %}{{ post.title }}{% endblock %}
 
-{% block first_content %}
+{% block content %}
     <section class="content">
         {% include "blog/post.html" %}
     </section>
-{% endblock %}
 
-{% block second_content %}
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */

@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
-    {% block first_content %}
+    {% block content %}
         {% for i in notification_list %}
             {{ i.reported }}
             {{ i.reporter }}
+            {{ i.notification }}
+            {{ i.datecreated }}
         {% endfor %}
     {% endblock %}

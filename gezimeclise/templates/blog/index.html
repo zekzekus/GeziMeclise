@@ -1,9 +1,17 @@
 {% extends "base.html" %}
-{% block first_content %}
+{% block content %}
      <h3> Blog Yazıları </h3>
     <section class="content">
         {% for post in posts %}
-            {% include "blog/post.html" %}
+            <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+        <h3><a itemprop="url" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+        <time datetime="{{ post.date_created }}">{{ post.date_created|date }}</time>
+
+    <section itemprop="articleBody" class="article">
+    <p>  {{ post.content|truncatewords:50 }}  </p>
+    </section>
+</article>
         {% endfor %}
         {% include "blog/pagination.html" %}
         <hr>

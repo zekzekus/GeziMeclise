@@ -19,7 +19,7 @@
 	<link href="{{ STATIC_URL }}restart/less/animate.less-master/animate.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="{{ STATIC_URL }}restart/js/woothemes-FlexSlider-06b12f8/flexslider.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="{{ STATIC_URL }}restart/js/prettyPhoto_3.1.5/prettyPhoto.css" type="text/css" media="screen" />
-	
+
 	<link href="{{ STATIC_URL }}restart/style.css" rel="stylesheet" type="text/css">
 
 	{% if debug %}
@@ -92,7 +92,7 @@
 					                <a href="{{ url_notifications }}" title="bildirimler"><i class="icon-bell"></i></a>
 					            </li>
 					            {% endwith %}
-					
+
 					            <li class="dropdown">
 					              <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown" title="{{ user }}">
 					              	<i class="icon-user"></i> <b class="caret"></b>
@@ -108,7 +108,7 @@
 
 
                             {% else %}
-                            <li><a href="http://{{ current_site.domain }}{% url account_login %}">
+                            <li><a href="{% url 'facebook_connect' %}">
                                 <i class="icon-signin"></i>
                                 GİRİŞ</a>
                             </li>
@@ -119,9 +119,9 @@
           </div>
 
           <div id="social_media_wrapper">
-              <a href="#facebook"><i class="icon icon-facebook"></i></a>
-              <a href="#twitter"><i class="icon icon-twitter"></i></a>
-              <a href="#googleplus"><i class="icon icon-google-plus"></i></a>
+              <a href="http://facebook.com/gezimeclise"><i class="icon icon-facebook"></i></a>
+              <a href="http://twitter.com/gezimeclise"><i class="icon icon-twitter"></i></a>
+              <a href="#"><i class="icon icon-google-plus"></i></a>
           </div>
 
      </div>
@@ -141,7 +141,7 @@
      	{% endfor %}
 
         {% block content %}{% endblock %}
-    
+
     </div>
 
     <footer>

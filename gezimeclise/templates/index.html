@@ -21,7 +21,9 @@
 <section class="call_to_action">
     <h3>ortak adaylarımızla yönetimde söz istiyoruz</h3>
     <h4>çünkü biz daha güzelini biliyoruz; parklarda, sokaklarda bunu yaşıyoruz</h4>
+    {% if not user.is_authenticated %}
     <a class="btn btn-primary btn-large" href="{% url "facebook_connect" %}">Sen de katıl, hareketi temsil et!</a>
+    {% endif %}
 </section>
 
 
@@ -52,7 +54,7 @@
                <i class="icon-search icon-4x"></i>
                <h3>Temsilcini denetle</h3>
                <p>
-               		Bağımsız temsilciler seçildikten sonra da platforma karşı sorumludurlar. Meclislerde alınacak kararlar platformda da oylanacak, temsilcilerin çıkan kararlar doğrultusunda hareket etmesi sağlanacaktır. 
+               		Bağımsız temsilciler seçildikten sonra da platforma karşı sorumludurlar. Meclislerde alınacak kararlar platformda da oylanacak, temsilcilerin çıkan kararlar doğrultusunda hareket etmesi sağlanacaktır.
                </p>
           </div>
      </div>
@@ -102,7 +104,7 @@
 	          </div>
 	     </div>
 	</section>
-	
+
 	{{ block.super }}
 
 {% endblock footer %}
