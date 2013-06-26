@@ -1,114 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]> <html class="no-js" lang="en"> ![endif]-->
+<!--[if lt IE 9]><script src="{{STATIC_URL}}js/html5shiv.js"></script><![endif]-->
+<html lang="tr">
+
 <head>
     <meta charset="utf-8">
     <title>{% block title %}Gezi Meclis'e{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="Robots" content="index,follow"/>
+	<meta name="Rating" content="General"/>
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Le styles -->
-    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}css/screen.css" rel="stylesheet">
-    <style type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,300italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link href="{{ STATIC_URL }}restart/less/animate.less-master/animate.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}restart/js/woothemes-FlexSlider-06b12f8/flexslider.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}restart/js/prettyPhoto_3.1.5/prettyPhoto.css" type="text/css" media="screen" />
+	
+	<link href="{{ STATIC_URL }}restart/style.css" rel="stylesheet" type="text/css">
 
-    </style>
-    <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
+	{% if debug %}
+		 <link rel="stylesheet" href="{{ STATIC_URL }}restart/fonts/font-awesome/css/font-awesome.min.css" media="screen" >
+		 <!--[if IE 7]>
+		    <link rel="stylesheet" href="{{ STATIC_URL }}restart/fonts/font-awsome/css/font-awesome-ie7.min.css">
+		<![endif]-->
+	{% else %}
+		 <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet">
+		 <!--[if IE 7]>
+		 <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome-ie7.min.css" rel="stylesheet">
+		<![endif]-->
+	{% endif %}
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="{{STATIC_URL}}js/html5shiv.js"></script>
-    <![endif]-->
+  <script type="text/javascript" src="{{ STATIC_URL }}restart/js/modernizr.custom.48287.js"></script>
+  <!-- Fav and touch icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}restart/apple-touch-icon-144x144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}restart/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}restart/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}restart/apple-touch-icon-57x57-precomposed.png">
 
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144"
-          href="{{ STATIC_URL }}ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114"
-          href="{{ STATIC_URL }}ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72"
-          href="{{ STATIC_URL }}ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed"
-          href="{{ STATIC_URL }}ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.png">
 </head>
 
-<body>
-
-<div class="container-narrow">
-
-    <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-
-            <li {% if request.path == '/' %}class="active"{% endif %}><a href="/">Ana Sayfa</a></li>
-
-            {% url "profile_list" as url_profiles %}
-            {% with len_slice=url_profiles|length|stringformat:"s" %}
-            <li {% if request.get_full_path == url_profiles %}class="active"{% endif %}>
-            	<a href="{{ url_profiles }}">Kullanıcılar</a>
-            </li>
-            {% endwith %}
+<body {% if request.path == '/' %}class="collapsing_header"{% endif %}>
 
 
-            {% if user.is_authenticated %}
-            {% url "notifications" as url_notifications %}
-            {% with len_slice=url_notifications|length|stringformat:"s" %}
-            <li {% if request.path|slice:len_slice == url_notifications %}class="active"{% endif %}>
-                <a href="{{ url_notifications }}">Bildirimler</a>
-            </li>
-            {% endwith %}
-            {% endif %}
+<header>
+     <div class="container">
+          <div class="navbar">
+               <div class="navbar-inner">
+                    <a class="brand" href="/">
+                        <span class="logo_title"><strong>GeziMeclise</strong><small>.org</small></span>
+                        <span class="logo_subtitle">gezi ruhunu yönetimlere taşımak için <span class="text-error"><strong>[beta]</strong></span></span>
+                    </a>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="nb_left pull-left">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </span>
+                        <span class="nb_right pull-right">menu</span>
+                    </a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right">
+				            {% url "profile_list" as url_profiles %}
+				            {% with len_slice=url_profiles|length|stringformat:"s" %}
+				            <li {% if request.get_full_path == url_profiles %}class="active"{% endif %}>
+				            	<a href="{{ url_profiles }}">Çapulcular</a>
+				            </li>
+				            {% endwith %}
 
-            {% url "blog" as url_blog %}
-            {% with len_slice=url_blog|length|stringformat:"s" %}
-            <li {% if request.get_full_path == url_blog %}class="active"{% endif %}>
-            	<a href="{{ url_blog }}">Günlük</a>
-            </li>
-            {% endwith %}
+				            {% url "blog" as url_blog %}
+				            {% with len_slice=url_blog|length|stringformat:"s" %}
+				            <li {% if request.get_full_path == url_blog %}class="active"{% endif %}>
+				            	<a href="{{ url_blog }}">Yazılar</a>
+				            </li>
+				            {% endwith %}
 
-            {% if user.is_authenticated %}
-           <li class="dropdown">
-                      <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{{user.username}} <b class="caret"></b></a>
-                      <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'friends_list' %}">Arkadaşlar</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'profile_detail' user.username %}">Profil</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'profile_update' %}">Profili Güncelle</a></li>
-                        <li role="presentation" class="divider"></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'facebook_disconnect' %}">Çıkış Yap</a></li>
-                      </ul>
-                    </li>
-            {% endif %}
-        </ul>
-        <h3 class="muted">Gezi Meclis'e</h3>
+                            <li>
+                                <form id="search" class="pull-left navbar-form" action="{% url "profile_list" %}">
+                                    <input type="text" name="q" placeholder="Ara">
+                                </form>
+                            </li>
+
+                            {% if user.is_authenticated %}
+
+					            {% url "notifications" as url_notifications %}
+					            {% with len_slice=url_notifications|length|stringformat:"s" %}
+					            <li {% if request.path|slice:len_slice == url_notifications %}class="active"{% endif %}>
+					                <a href="{{ url_notifications }}" title="bildirimler"><i class="icon-bell"></i></a>
+					            </li>
+					            {% endwith %}
+					
+					            <li class="dropdown">
+					              <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown" title="{{ user }}">
+					              	<i class="icon-user"></i> <b class="caret"></b>
+					              </a>
+					              <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+					                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'friends_list' %}">Arkadaşlar</a></li>
+					                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'profile_detail' user.username %}">Profil</a></li>
+					                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'profile_update' %}">Profili Güncelle</a></li>
+					                <li role="presentation" class="divider"></li>
+					                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'facebook_disconnect' %}">Çıkış Yap</a></li>
+					              </ul>
+					            </li>
+
+
+                            {% else %}
+                            <li><a href="http://{{ current_site.domain }}{% url account_login %}">
+                                <i class="icon-signin"></i>
+                                GİRİŞ</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+               </div>
+          </div>
+
+          <div id="social_media_wrapper">
+              <a href="#facebook"><i class="icon icon-facebook"></i></a>
+              <a href="#twitter"><i class="icon icon-twitter"></i></a>
+              <a href="#googleplus"><i class="icon icon-google-plus"></i></a>
+          </div>
+
+     </div>
+</header>
+
+
+{% block full_page_banner %}{% endblock %}
+
+
+<div id="main">
+     <div class="container">
+     	{% for message in messages %}
+     		<div class="alert alert-{{ message.tags }}">
+     			<a class="close" data-dismiss="alert" href="#">&times;</a>
+     			{{ message }}
+     		</div>
+     	{% endfor %}
+
+        {% block content %}{% endblock %}
+    
     </div>
 
-    <hr>
-
-    {% block first_content %}
-
-    {% endblock %}
-
-
-
-    <div class="row-fluid marketing">
-        {% block second_content %}
-
-        {% endblock %}
-    </div>
-
-    <hr>
-
-    <div class="footer">
-        <p>31 Mayıs 2013</p>
-    </div>
+    <footer>
+        {% block footer %}
+        {% endblock footer %}
+    </footer>
 
 </div>
-<!-- /container -->
 
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="{{ STATIC_URL }}js/jquery-min.js"></script>
-<script src="{{ STATIC_URL }}js/bootstrap.js"></script>
+</body>
+
+
 <script src="//connect.facebook.net/en_US/all.js"></script>
 <script>
       FB.init({
@@ -125,11 +170,28 @@
       function requestCallback(response) {
         // Handle callback here
       }
-    </script>
-</body>
-<footer>
-    {% block footer %}
+</script>
 
-    {% endblock %}
-</footer>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ STATIC_URL }}restart/js/jquery-1.9.0.min.js"><\/script>')</script>
+
+<script src="{{ STATIC_URL }}restart/twitter-bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}restart/js/modernizr.custom.48287.js"></script>
+<script src="{{ STATIC_URL }}restart/js/woothemes-FlexSlider-06b12f8/jquery.flexslider-min.js"></script>
+<script src="{{ STATIC_URL }}restart/js/prettyPhoto_3.1.5/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+<script src="{{ STATIC_URL }}restart/js/isotope/jquery.isotope.min.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}restart/js/jquery.infinitescroll.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}restart/js/jquery.ui.totop.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}restart/js/restart_theme.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("[rel='tooltip']").tooltip();
+        $("[rel='popover']").popover();
+    });
+</script>
+
+{% block extra_bottom %}
+{% endblock %}
+
 </html>

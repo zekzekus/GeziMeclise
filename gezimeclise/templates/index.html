@@ -1,15 +1,108 @@
 {% extends "base.html" %}
 
 
-{% block first_content %}
-    <div class="jumbotron">
-        <img src="{{ STATIC_URL }}img/logo.png" alt="">
-        <p class="lead">Gezi Direnişi'ni Meclis'e taşımak, katılımcı doğrudan demokrasiyi temellerinden yeniden inşaa etmek için</p>
-        {% if not user.is_authenticated %}
-        	<a class="btn btn-large btn-success" href="{% url 'facebook_connect' %}">Üye ol veya Giriş yap!</a>
-        {% endif %}
-    </div>
+{% block full_page_banner %}
+
+<div class="full_page_photo" style="background-image: url({{ STATIC_URL }}park.jpg);">
+     <div class="container">
+          <section class="call_to_action" style="margin-bottom: 10px">
+               <h3>Katılımcı doğrudan demokrasi için</h3>
+               <h3><strong>Gezi ruhu yönetime!</strong></h3>
+          </section>
+     </div>
+</div>
+
 {% endblock %}
 
-{% block second_content %}
+
+{% block content %}
+
+
+<section class="call_to_action">
+    <h3>ortak adaylarımızla yönetimde söz istiyoruz</h3>
+    <h4>çünkü biz daha güzelini biliyoruz; parklarda, sokaklarda bunu yaşıyoruz</h4>
+    <a class="btn btn-primary btn-large" href="{% url "facebook_connect" %}">Sen de katıl, hareketi temsil et!</a>
+</section>
+
+
+<section id="features_teasers_wrapper">
+     <div class="row">
+          <div class="span3 feature_teaser text-info">
+               <i class="icon-question-sign icon-4x "></i>
+               <h3>Ne istiyoruz?</h3>
+               <p>
+                   Hayatımızı etkileyen kararların bize sorulmadan alındığı mevcut meclis, siyasi partiler ve yerel yönetimler, biz halkı temsil etmiyor. Gezi ruhunu yönetimlere taşıyarak, <strong>bağımsız adaylarımız</strong> ile katılımcı, doğrudan demokrasiyi tekrar temellerinden kurmak istiyoruz.
+               </p>
+          </div>
+          <div class="span3 feature_teaser text-warning">
+               <i class="icon-group icon-4x"></i>
+               <h3>Adaylar kim?</h3>
+               <p>
+               		Sen ve senin gibi <strong>tüm platform üyeleri</strong> belediye meclislerinde ve TBMM'de hareketi temsil edecek bağımsız aday adaylarımızdır. Adaylarımızı şeffaf bir şekilde, ortak akılla belirliyor ve seçimlerde destekliyoruz.
+               </p>
+          </div>
+          <div class="span3 feature_teaser text-success">
+               <i class="icon-thumbs-up icon-4x"></i>
+               <h3>Destekle ve desteklen</h3>
+               <p>
+               		Üye ol, kendini tanıt ve seni temsil edecek adayları destekle ve üyelerin desteğini al. Seçim zamanı bir bölgeden en çok destek alan kişi platformun adayı olacaktır. Burada rekabet değil <strong>dayanışma</strong> esastır.
+               </p>
+          </div>
+          <div class="span3 feature_teaser text-error">
+               <i class="icon-search icon-4x"></i>
+               <h3>Temsilcini denetle</h3>
+               <p>
+               		Bağımsız temsilciler seçildikten sonra da platforma karşı sorumludurlar. Meclislerde alınacak kararlar platformda da oylanacak, temsilcilerin çıkan kararlar doğrultusunda hareket etmesi sağlanacaktır. 
+               </p>
+          </div>
+     </div>
+</section>
+
+
 {% endblock %}
+
+
+
+{% block footer %}
+
+	<section id="footer_teasers_wrapper">
+	     <div class="container">
+	          <div class="row">
+	               <div class="span4 footer_teaser">
+	                    <h3>Bağlantılar</h3>
+	                    <p><a href="https://github.com/GeziMeclise/GeziMeclise">Platformun kaynak kodları</a></p>
+	               </div>
+	               <div class="span4 footer_teaser">
+	                    <h3>Duyurular</h3>
+	                    {% if announcements %}
+	                    <ul class="media-list">
+	                    	 {% for announcement in announcements %}
+	                         <li class="media">
+	                              <a href="{{ announcement.get_absolute_url }}" class="media-photo" style="background-image:url({{ STATIC_URL }}restart/images/portfolio/t4.jpg)"></a>
+	                              <a href="{{ announcement.get_absolute_url }}" class="media-date">{{ announcement.time|date:"d" }}<span>{{ announcement.time|date:"b"|upper }}</span></a>
+	                              <h5 class="media-heading"><a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a></h5>
+	                              <p>{{ announcement.body|truncatewords_html:10 }}</p>
+	                         </li>
+	                         {% endfor %}
+	                    </ul>
+	                    {% endif %}
+	               </div>
+	               <div class="span4 footer_teaser">
+	                    <h3>Çapulcular</h3>
+				        <div class="row-fluid">
+				          {% for profile in profiles %}
+				             <div class="span2">
+				               <a href="{{ profile.get_absolute_url }}">
+				               <img src="" title="{{ profile }}">
+				               </a>
+				             </div>
+				          {% endfor %}
+				        </div>
+	               </div>
+	          </div>
+	     </div>
+	</section>
+	
+	{{ block.super }}
+
+{% endblock footer %}

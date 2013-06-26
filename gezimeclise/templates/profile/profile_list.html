@@ -1,13 +1,12 @@
 {% extends "base.html" %}
-{% block first_content %}
-	<form class="form-search">
-	  <input type="text" class="input-medium search-query" name="q">
-	  <button type="submit" class="btn">Ara</button>
-	</form>
 
-    {% for object in object_list %}
+{% load profile_tags %}
+
+{% block content %}
+
+    {% for profile in object_list %}
         <div class="span2 profile-column">
-            <a href="{% url "profile_detail" object.username %}">
+            <a href="{% url "profile_detail" user.username %}">
                 {% if object.image %}
                     <img src="{{ object.image.url }}">
                 {% endif %}
@@ -24,4 +23,142 @@
 
     <div class="clearfix"></div>
 
+
+<section id="discover_title">
+
+    {% with request.GET.q as query %}
+    
+     <div class="hgroup">
+        <div class="row">
+           <div class="{% if domain_user %}span8{% else %}span9{% endif %}">
+              <h1>adaylar</h1>
+              <div class="post-sub">
+
+                <span class="text-warning"><i class="icon-th"></i> {{ post_count }} kullanıcı</span>
+
+                {% if object_list %}
+                <span class="dropdown">
+                  <a href="#sorting" class="dropdown-toggle text-success" data-toggle="dropdown">{% if sorting == 'pop' %}popüler{% else %}son{% endif %} <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{% update_get drop s %}">son</a></li>
+                    <li><a href="{% update_get with s='pop' %}">popüler</a></li>
+                  </ul>
+                </span>
+                {% endif %}
+
+              </div>
+           </div>
+
+           {% if object_list %}
+           <div class="span3">
+             <form>
+               <div class="input-append pull-right">
+                 <input class="span2" type="text" name="q" placeholder="Liste içinde ara">
+                 <button class="btn" type="submit"><i class="icon-search"></i></button>
+               </div>
+             </form>
+           </div>
+           {% endif %}
+
+        </div>
+         
+     </div>
+     {% endwith %}
+</section>
+
+
+<div class="row">
+
+    <div class="span9">
+
+		{% if object_list %}
+		
+		<div class="portfolio_strict row" id="content_container" style="overflow:visible !important">
+		  {% for user in object_list %}
+		    <div class="portfolio_item span3">
+		         <div class="portfolio_photo" {% if user.image %}style="background-image:url({{ user.image.url }})"{% endif %}>
+		           <a href="{% url "profile_detail" user.username %}">
+		             <p>
+		             	{{ user.about|default:""|truncatewords:10 }}
+		             	<br/>
+						<em>{{ user.supports.all.count }} desteklediği, {{ user.supporters.all.count }} destekçisi var</em>
+		             </p>
+		           </a>
+		         </div>
+		         <div class="portfolio_description">
+		              <h3><a href="{{ profile.get_absolute_url }}">{{ user.get_full_name }}</a></h3>
+		              <p>{{ user.supporters.all.count }} <i class="icon-thumbs-up"></i></p>
+		         </div>
+		    </div>
+		  {% endfor %}
+		</div>
+		
+		{% else %}
+		
+		<div class="alert alert-block">
+		  <h3>Kimseyi bulamadık</h3>
+		  Bu kriterlere uygun aday yok!
+		</div>
+		
+		{% endif %}
+
+    </div>
+
+</div>
+
+
+{% if posts.has_previous or posts.has_next %}
+<div class="pagination">
+  <ul>
+    {% if posts.has_previous %}
+      <li><a href="{% update_get with p=posts.previous_page_number %}">&laquo;</a></li>
+    {% endif %}
+    {% if posts.has_next %}
+      <li><a href="{% update_get with p=posts.next_page_number %}" class="next">&raquo;</a></li>
+    {% endif %}
+  </ul>
+</div>
+{% endif %}
+
+<div id="loading"></div>
+
 {% endblock %}
+
+
+{% block extra_bottom %}
+
+{# infinite scroll #}
+<script>
+    $(function(){
+
+      var $container = $('#content_container');
+    
+      $container.isotope({
+        itemSelector : '.portfolio_item',
+        animationOptions: {
+             queue: false
+        }
+      });
+      
+      $container.infinitescroll({
+        navSelector  : '.pagination',    // selector for the paged navigation 
+        nextSelector : '.pagination a.next',  // selector for the NEXT link (to page 2)
+        itemSelector : '.portfolio_item',     // selector for all items you'll retrieve
+        loading: {
+            finishedMsg: '',
+            img: 'http://i.imgur.com/qkKy8.gif',
+            msgText: "",
+            selector: '#loading'
+          }
+        },
+        // call Isotope as a callback
+        function( newElements ) {
+          $container.isotope( 'appended', $( newElements ) );
+        }
+      );
+      
+    });
+  </script>
+
+{% endblock %}
+  

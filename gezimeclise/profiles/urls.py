@@ -8,7 +8,6 @@ urlpatterns = patterns('',
     url(r'^friends_list/$', FriendsListView.as_view(), name="friends_list"),
     url(r'^$', ProfileListView.as_view(), name="profile_list"),
     url(r'^update/$', ProfileUpdateView.as_view(), name="profile_update"),
-    url(r'^(?P<username>[-\w]+)/$', ProfileDetailView.as_view(),
-        name="profile_detail"),
     url(r'^support/$', ProfileSupport.as_view(), name="profile_support"),
+    url(r'^(?P<username>[-\w]+)/$', ProfileDetailView.as_view(), name="profile_detail"),
 )
