@@ -4,21 +4,7 @@
 
 {% block content %}
 
-    {% for profile in object_list %}
-        <div class="span2 profile-column">
-            <a href="{% url "profile_detail" user.username %}">
-                {% if object.image %}
-                    <img src="{{ object.image.url }}">
-                {% endif %}
-                <br/>
-                {{ object.get_full_name }}
-            </a>
 
-            {% for tag in object.tags.all %}
-                <a class="label" href="?tag={{tag.name}}">{{tag.name}}</a>
-            {% endfor %}
-        </div>
-	{% endfor %}
 
     <div class="clearfix"></div>
 
@@ -73,20 +59,20 @@
 		{% if object_list %}
 
 		<div class="portfolio_strict row" id="content_container" style="overflow:visible !important">
-		  {% for user in object_list %}
+		  {% for obj in object_list %}
 		    <div class="portfolio_item span3">
-		         <div class="portfolio_photo" {% if user.image %}style="background-image:url({{ user.image.url }})"{% endif %}>
-		           <a href="{% url "profile_detail" user.username %}">
+		         <div class="portfolio_photo" {% if obj.image %}style="background-image:url({{ obj.image.url }})"{% endif %}>
+		           <a href="{% url "profile_detail" obj.username %}">
 		             <p>
-		             	{{ user.about|default:""|truncatewords:10 }}
+		             	{{ obj.about|default:""|truncatewords:10 }}
 		             	<br/>
-						<em>{{ user.supports.all.count }} desteklediği, {{ user.supporters.all.count }} destekçisi var</em>
+						<em>{{ obj.supports.all.count }} desteklediği, {{ obj.supporters.all.count }} destekçisi var</em>
 		             </p>
 		           </a>
 		         </div>
 		         <div class="portfolio_description">
-		              <h3><a href="{{ profile.get_absolute_url }}">{{ user.get_full_name }}</a></h3>
-		              <p>{{ user.supporters.all.count }} <i class="icon-thumbs-up"></i></p>
+		              <h3><a href="{{ profile.get_absolute_url }}">{{ obj.get_full_name }}</a></h3>
+		              <p>{{ obj.supporters.all.count }} <i class="icon-thumbs-up"></i></p>
 		         </div>
 		    </div>
 		  {% endfor %}
