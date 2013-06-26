@@ -97,6 +97,7 @@
 					              <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown" title="{{ user }}">
 					              	<i class="icon-user"></i> <b class="caret"></b>
 					              </a>
+                        {% if user.is_authenticated %}
 					              <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
 					                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'friends_list' %}">Arkadaşlar</a></li>
 					                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'profile_detail' user.username %}">Profil</a></li>
@@ -105,7 +106,7 @@
 					                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'facebook_disconnect' %}">Çıkış Yap</a></li>
 					              </ul>
 					            </li>
-
+                        {% endif %}
 
                             {% else %}
                             <li><a href="{% url 'facebook_connect' %}">
@@ -121,7 +122,7 @@
           <div id="social_media_wrapper">
               <a href="http://facebook.com/gezimeclise"><i class="icon icon-facebook"></i></a>
               <a href="http://twitter.com/gezimeclise"><i class="icon icon-twitter"></i></a>
-              <a href="#"><i class="icon icon-google-plus"></i></a>
+              <a href="#  "><i class="icon icon-google-plus"></i></a>
           </div>
 
      </div>
