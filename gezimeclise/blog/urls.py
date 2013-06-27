@@ -9,9 +9,9 @@ urlpatterns = patterns('',
 
     # blog urls
     url(r'^$', BlogIndexView.as_view(), name="blog"),
-    url(r'^blog/(?P<slug>[-\w]+)/$', BlogDetailView.as_view(), name="blog_detail"),
-    url(r'^update/(?P<slug>[-\w]+)/$', BlogUpdateView.as_view(),name="blog_update"),
-    url(r'^create/$', BlogCreateView.as_view(),name="blog_create"),
+    url(r'^yazi/(?P<slug>[-\w]+)/$', BlogDetailView.as_view(), name="blog_detail"),
+    url(r'^guncelle/(?P<slug>[-\w]+)/$', BlogUpdateView.as_view(),name="blog_update"),
+    url(r'^olustur/$', BlogCreateView.as_view(),name="blog_create"),
     url(r'^(?P<slug>[-\w]+)/$', BlogDetailView.as_view(), name="blog_detail"),
 
 

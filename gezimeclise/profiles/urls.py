@@ -5,9 +5,9 @@ from gezimeclise.profiles.views import (ProfileListView,
                                         ProfileSupport, FriendsListView)
 
 urlpatterns = patterns('',
-    url(r'^friends_list/$', FriendsListView.as_view(), name="friends_list"),
+    url(r'^arkadas_listesi/$', FriendsListView.as_view(), name="friends_list"),
     url(r'^$', ProfileListView.as_view(), name="profile_list"),
-    url(r'^update/$', ProfileUpdateView.as_view(), name="profile_update"),
-    url(r'^support/$', ProfileSupport.as_view(), name="profile_support"),
+    url(r'^guncelle/$', ProfileUpdateView.as_view(), name="profile_update"),
+    url(r'^destek/$', ProfileSupport.as_view(), name="profile_support"),
     url(r'^(?P<username>[-\w]+)/$', ProfileDetailView.as_view(), name="profile_detail"),
 )
