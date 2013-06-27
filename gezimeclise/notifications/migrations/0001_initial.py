@@ -11,9 +11,9 @@ class Migration(SchemaMigration):
         # Adding model 'Notification'
         db.create_table(u'notifications_notification', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('sender', self.gf('django.db.models.fields.related.ForeignKey')(related_name='sender', to=orm['profiles.GeziUser'])),
-            ('receiver', self.gf('django.db.models.fields.related.ForeignKey')(related_name='receiver', to=orm['profiles.GeziUser'])),
-            ('notification', self.gf('django.db.models.fields.IntegerField')(max_length=255)),
+            ('sender', self.gf('django.db.models.fields.related.ForeignKey')(related_name='sent_notifications', to=orm['profiles.GeziUser'])),
+            ('receiver', self.gf('django.db.models.fields.related.ForeignKey')(related_name='received_notifications', to=orm['profiles.GeziUser'])),
+            ('notification', self.gf('django.db.models.fields.IntegerField')()),
             ('read', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('date_created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
         ))
@@ -50,10 +50,10 @@ class Migration(SchemaMigration):
             'Meta': {'ordering': "['read', '-date_created']", 'object_name': 'Notification'},
             'date_created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'notification': ('django.db.models.fields.IntegerField', [], {'max_length': '255'}),
+            'notification': ('django.db.models.fields.IntegerField', [], {}),
             'read': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'receiver': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'receiver'", 'to': u"orm['profiles.GeziUser']"}),
-            'sender': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'sender'", 'to': u"orm['profiles.GeziUser']"})
+            'receiver': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'received_notifications'", 'to': u"orm['profiles.GeziUser']"}),
+            'sender': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'sent_notifications'", 'to': u"orm['profiles.GeziUser']"})
         },
         u'profiles.geziuser': {
             'Meta': {'object_name': 'GeziUser'},
@@ -81,8 +81,9 @@ class Migration(SchemaMigration):
             'new_token_required': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'raw_data': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'region': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['profiles.Region']", 'null': 'True'}),
+            'region': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['profiles.Region']", 'null': 'True', 'blank': 'True'}),
             'supports': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'supporters'", 'blank': 'True', 'to': u"orm['profiles.GeziUser']"}),
+            'twitter': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'}),
             'website_url': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'})

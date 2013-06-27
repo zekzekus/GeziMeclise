@@ -8,4 +8,5 @@
 !.gitignore
 settings_local.py
 /env
+/static
 s3utils.py

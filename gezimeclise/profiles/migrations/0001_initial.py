@@ -43,7 +43,8 @@ class Migration(SchemaMigration):
             ('new_token_required', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('image', self.gf('django.db.models.fields.files.ImageField')(max_length=255, null=True, blank=True)),
             ('causes', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-            ('region', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['profiles.Region'], null=True)),
+            ('region', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['profiles.Region'], null=True, blank=True)),
+            ('twitter', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
         ))
         db.send_create_signal(u'profiles', ['GeziUser'])
 
@@ -74,8 +75,23 @@ class Migration(SchemaMigration):
         ))
         db.create_unique(m2m_table_name, ['from_geziuser_id', 'to_geziuser_id'])
 
+        # Adding model 'Report'
+        db.create_table(u'profiles_report', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('reporter', self.gf('django.db.models.fields.related.ForeignKey')(related_name='reporter', to=orm['profiles.GeziUser'])),
+            ('reported', self.gf('django.db.models.fields.related.ForeignKey')(related_name='reported', to=orm['profiles.GeziUser'])),
+            ('topic', self.gf('django.db.models.fields.IntegerField')()),
+        ))
+        db.send_create_signal(u'profiles', ['Report'])
+
+        # Adding unique constraint on 'Report', fields ['reporter', 'reported', 'topic']
+        db.create_unique(u'profiles_report', ['reporter_id', 'reported_id', 'topic'])
+
 
     def backwards(self, orm):
+        # Removing unique constraint on 'Report', fields ['reporter', 'reported', 'topic']
+        db.delete_unique(u'profiles_report', ['reporter_id', 'reported_id', 'topic'])
+
         # Deleting model 'Region'
         db.delete_table(u'profiles_region')
 
@@ -90,6 +106,9 @@ class Migration(SchemaMigration):
 
         # Removing M2M table for field supports on 'GeziUser'
         db.delete_table(db.shorten_name(u'profiles_geziuser_supports'))
+
+        # Deleting model 'Report'
+        db.delete_table(u'profiles_report')
 
 
     models = {
@@ -139,8 +158,9 @@ class Migration(SchemaMigration):
             'new_token_required': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'raw_data': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'region': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['profiles.Region']", 'null': 'True'}),
+            'region': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['profiles.Region']", 'null': 'True', 'blank': 'True'}),
             'supports': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'supporters'", 'blank': 'True', 'to': u"orm['profiles.GeziUser']"}),
+            'twitter': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'}),
             'website_url': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'})
@@ -150,6 +170,13 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['profiles.Region']", 'null': 'True', 'blank': 'True'})
+        },
+        u'profiles.report': {
+            'Meta': {'unique_together': "(('reporter', 'reported', 'topic'),)", 'object_name': 'Report'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'reported': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'reported'", 'to': u"orm['profiles.GeziUser']"}),
+            'reporter': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'reporter'", 'to': u"orm['profiles.GeziUser']"}),
+            'topic': ('django.db.models.fields.IntegerField', [], {})
         },
         u'taggit.tag': {
             'Meta': {'object_name': 'Tag'},

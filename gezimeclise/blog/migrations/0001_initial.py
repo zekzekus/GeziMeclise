@@ -87,8 +87,9 @@ class Migration(SchemaMigration):
             'new_token_required': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'raw_data': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'region': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['profiles.Region']", 'null': 'True'}),
+            'region': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['profiles.Region']", 'null': 'True', 'blank': 'True'}),
             'supports': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'supporters'", 'blank': 'True', 'to': u"orm['profiles.GeziUser']"}),
+            'twitter': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'}),
             'website_url': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'})
