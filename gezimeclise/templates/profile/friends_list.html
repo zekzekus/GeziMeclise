@@ -8,7 +8,7 @@
         <div class="span2 profile-column">
             <a href="{% url "profile_detail" user.username %}">
 
-                    <img src="http://graph.facebook.com/{{object.facebook_id}}}/picture?type=large">
+                    <img src="http://graph.facebook.com/{{ object.facebook_id }}/picture?type=large">
 
                 <br/>
                 {{ object.get_full_name }}
