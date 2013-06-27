@@ -27,7 +27,7 @@
                 <p class="count">
                     <strong>{{ object.supporters.all.count }}</strong>
                     destek
-	                       {% if not request.user == object %}
+	                       {% if user.is_authenticated and not request.user == object %}
                 <div class="support-action" id="id_div_unsupport" {% if not object in user.supports.all %}style="display:none"{% endif %}>
                     Bu adayı destekliyorsun!
                     <a class="support" data-username="{{ object.username }}" data-support="-">Desteğimi çekmek istiyorum.</a>

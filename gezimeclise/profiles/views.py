@@ -7,12 +7,12 @@ from gezimeclise.profiles.forms import ProfileUpdateForm, ReportForm
 
 
 class FriendsListView(ListView):
-    model = GeziUser
+
     paginate_by = 15
-    template_name="profile/friends_list.html"
+    template_name = "profile/friends_list.html"
 
     def get_queryset(self):
-        return self.model.get_friends(self.request.user)
+        return GeziUser.get_registered_friends(self.request.user)
 
 
 class ProfileListView(ListView):
@@ -40,13 +40,13 @@ def discover(request, tag_slug=None, loc_slug=None, tag_or_loc_slug=None):
         domain_user: comes from the subdomain, attached to the request object by relevant middleware
         tag or location: if there is one slug, it can be either a location or a tag
         tag and location: if there are two slugs, one is the location and the other is the tag
-        
+
     Query string parameters for filtering and sorting:
         list_type (l): all, own, like (if domain user exists)
         sorting (s): last / popular
         query (q): search query string
     """
-    
+
     # tag / location match
     # we may have both tag and loc slugs or just one tag_or_loc slug
     location = None
@@ -66,35 +66,35 @@ def discover(request, tag_slug=None, loc_slug=None, tag_or_loc_slug=None):
     sorting = request.GET.get('s')
     list_type = request.GET.get('l')
     query = request.GET.get('q')
-    
+
     posts = Post.objects.discover(user=request.domain_user, tag=tag, location=location,
                                   list_type=list_type, query=query)
-    
+
     last_time = None
     if posts.count() > 0:
         last_time = posts[0].time
 
     if sorting == 'pop':
         posts = posts.order_by('-featured', '-rank')
-    
+
     post_count = posts.count()
-    
+
     context = {'tag': tag,
                'location': location,
                'list_type': list_type,
                'sorting': sorting,
                'last_time': last_time,
                'post_count': post_count}
-    
+
     if not request.is_ajax():
         # skip this part for ajax requests by the infinite scroll
-        
+
         # tags of the posts listed
         tags = Tag.objects.none()
         for post in posts[:60]:
             tags |= post.tags.all()
         tags = tags.distinct()
-        
+
         # locations of the posts listed
         loc_ids = set(posts.values_list('location', flat=True))
         locations = Location.objects.filter(id__in=loc_ids)
@@ -108,12 +108,11 @@ def discover(request, tag_slug=None, loc_slug=None, tag_or_loc_slug=None):
     except:
         # deliver the first page if page is invalid
         posts = Post.objects.none()
-    
+
     context.update({'posts': posts})
 
-    return render_to_response('usercontent/discover.html', context, 
-                              context_instance=RequestContext(request))
-
+    return render_to_response('usercontent/discover.html', context,
+                               context_instance=RequestContext(request))
 
 
 class ProfileDetailView(DetailView):

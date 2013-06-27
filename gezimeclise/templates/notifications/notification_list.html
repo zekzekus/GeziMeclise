@@ -1,10 +1,24 @@
 {% extends "base.html" %}
 
     {% block content %}
-        {% for i in notification_list %}
-            {{ i.reported }}
-            {{ i.reporter }}
-            {{ i.notification }}
-            {{ i.datecreated }}
+
+       <p><h3>Bildirimler</h3></p>
+       <table class="table table-striped">
+            <thead>
+            <tr>
+                <th> Gönderen </th>
+                <th> Bildirim </th>
+                <th> Bildirim zamanı </th>
+           </tr>
+            </thead>
+            <tbody>
+            {% for i in notification_list %}
+            <tr>
+            <td>{{ i.sender }}</td>
+            <td>{{ i.as_text }}</td>
+            <td>{{ i.date_created }}</td>
+            </tr>
+            </tbody>
+            </table>
         {% endfor %}
     {% endblock %}

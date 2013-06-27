@@ -4,24 +4,6 @@
 
 {% block content %}
 
-    {% for profile in object_list %}
-        <div class="span2 profile-column">
-            <a href="{% url "profile_detail" user.username %}">
-
-                    <img src="http://graph.facebook.com/{{ object.facebook_id }}/picture?type=large">
-
-                <br/>
-                {{ object.get_full_name }}
-            </a>
-
-            {% for tag in object.tags.all %}
-                <a class="label" href="?tag={{tag.name}}">{{tag.name}}</a>
-            {% endfor %}
-        </div>
-    {% endfor %}
-
-    <div class="clearfix"></div>
-
 
 <section id="discover_title">
 

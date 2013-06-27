@@ -12,8 +12,8 @@ NOTIFICATIONS_CHOICES = (
 )
 
 NOTIFICATION_TEMPLATES = {
-    NOTIFICATIONS_TYPE_NEW_USER: "%(username)s is now here.",
-    NOTIFICATIONS_TYPE_SUPPORT: "%(username)s is supporting you now.",
+    NOTIFICATIONS_TYPE_NEW_USER: "%(username)s artık burada.",
+    NOTIFICATIONS_TYPE_SUPPORT: "%(username)s seni destekliyor.",
 }
 
 
