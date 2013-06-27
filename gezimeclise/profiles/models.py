@@ -6,7 +6,6 @@ from django_facebook.models import FacebookModel
 from django.contrib.auth.models import AbstractUser, UserManager
 from taggit.managers import TaggableManager
 from django_facebook.models import FacebookUser
-from django_facebook.api import get_facebook_graph, FacebookUserConverter
 from django_facebook.signals import facebook_post_store_friends
 
 
@@ -16,7 +15,7 @@ REPORTTOPICS = ((1, "FAKE ACCOUNT"),
 
 class Region(models.Model):
     name = models.CharField(max_length=255)
-    parent = models.ForeignKey('self', blank=True, null= True)
+    parent = models.ForeignKey('self', blank=True, null=True)
 
     def __unicode__(self):
         return self.name
@@ -28,7 +27,7 @@ class GeziUser(AbstractUser, FacebookModel):
     causes = models.TextField(blank=True, null=True)
     tags = TaggableManager(blank=True)
     region = models.ForeignKey(Region, blank=True, null=True)
-    twitter = models.CharField(max_length=255,blank=True,null=True)
+    twitter = models.CharField(max_length=255, blank=True, null=True)
     objects = UserManager()
 
     def get_facebook_friends(self):
@@ -41,8 +40,8 @@ class GeziUser(AbstractUser, FacebookModel):
         )
 
     def get_friends(self):
-        return GeziUser.objects.filter\
-                (facebook_id__in=FacebookUser.objects.filter(
+        return GeziUser.objects.filter(
+            facebook_id__in=FacebookUser.objects.filter(
                 user_id=self.id))
 
 
@@ -58,7 +57,7 @@ class Report(models.Model):
         return str(self.reporter + self.reported + self.topic)
 
     def deactivate_user(self):
-        self.reporter.is_active=False
+        self.reporter.is_active = False
         self.reporter.save()
 
 

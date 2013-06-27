@@ -7,9 +7,9 @@
     {% for profile in object_list %}
         <div class="span2 profile-column">
             <a href="{% url "profile_detail" user.username %}">
-                {% if object.image %}
-                    <img src="{{ object.image.url }}">
-                {% endif %}
+
+                    <img src="http://graph.facebook.com/{{object.facebook_id}}}/picture?type=large">
+
                 <br/>
                 {{ object.get_full_name }}
             </a>
