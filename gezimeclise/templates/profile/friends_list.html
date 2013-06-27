@@ -75,7 +75,7 @@
         <div class="portfolio_strict row" id="content_container" style="overflow:visible !important">
           {% for user in object_list %}
             <div class="portfolio_item span3">
-                 <div class="portfolio_photo" {% if user.image %}style="background-image:url({{ user.image.url }})"{% endif %}>
+             <div class="portfolio_photo" style="background-image:url(http://graph.facebook.com/{{ obj.facebook_id }}/picture?type=large)">
                    <a href="{% url "profile_detail" user.username %}">
                      <p>
                         {{ user.about|default:""|truncatewords:10 }}
