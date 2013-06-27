@@ -1,12 +1,12 @@
 GeziMeclise.org Platformu
 =========================
 
- d888b  d88888b d88888D d888888b .88b  d88. d88888b  .o88b. db      d888888b .d8888. d88888b
-88' Y8b 88'     YP  d8'   `88'   88'YbdP`88 88'     d8P  Y8 88        `88'   88'  YP 88'
-88      88ooooo    d8'     88    88  88  88 88ooooo 8P      88         88    `8bo.   88ooooo
-88  ooo 88~~~~~   d8'      88    88  88  88 88~~~~~ 8b      88         88      `Y8b. 88~~~~~
-88. ~8~ 88.      d8' db   .88.   88  88  88 88.     Y8b  d8 88booo.   .88.   db   8D 88.
- Y888P  Y88888P d88888P Y888888P YP  YP  YP Y88888P  `Y88P' Y88888P Y888888P `8888Y' Y88888P
+     d888b  d88888b d88888D d888888b .88b  d88. d88888b  .o88b. db      d888888b .d8888. d88888b
+    88' Y8b 88'     YP  d8'   `88'   88'YbdP`88 88'     d8P  Y8 88        `88'   88'  YP 88'
+    88      88ooooo    d8'     88    88  88  88 88ooooo 8P      88         88    `8bo.   88ooooo
+    88  ooo 88~~~~~   d8'      88    88  88  88 88~~~~~ 8b      88         88      `Y8b. 88~~~~~
+    88. ~8~ 88.      d8' db   .88.   88  88  88 88.     Y8b  d8 88booo.   .88.   db   8D 88.
+     Y888P  Y88888P d88888P Y888888P YP  YP  YP Y88888P  `Y88P' Y88888P Y888888P `8888Y' Y88888P
 
 
 (scroll down for English)
