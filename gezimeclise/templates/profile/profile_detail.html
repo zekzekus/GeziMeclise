@@ -19,7 +19,7 @@
 
 	    <div class="row">
 	        <div class="span2 profile-info">
-	            <p><img src="{{ MEDIA_URL}}{{ object.image }}"></p>
+	            <p><img src="{{ object.image.url }}"></p>
                 <p class="count">
                     <strong>{{ object.supports.all.count }}</strong>
                     desteklediği
@@ -27,22 +27,23 @@
                 <p class="count">
                     <strong>{{ object.supporters.all.count }}</strong>
                     destek
-	        </div>
+	                       {% if not request.user == object %}
+                <div class="support-action" id="id_div_unsupport" {% if not object in user.supports.all %}style="display:none"{% endif %}>
+                    Bu adayı destekliyorsun!
+                    <a class="support" data-username="{{ object.username }}" data-support="-">Desteğimi çekmek istiyorum.</a>
+                </div>
+                <div class="support-action" id="id_div_support" {% if object in user.supports.all %}style="display:none"{% endif %}>
+                    <a class="btn support" id="btn_destek" data-username="{{ object.username }}" data-support="+">Beni temsil eder, destekliyorum!</a>
+                </div>
+                {% endif %}
+            </div>
 
 	        <div class="span6 profile-detail">
 
 				<a class="label" href="{% url "profile_list" %}?tag={{tag.name}}">{{tag.name}}</a>
 				<input class="username" type="hidden" data-username="{{ object.username }}">
 
-				{% if not request.user == object %}
-	            <div class="support-action" id="id_div_unsupport" {% if not object in user.supports.all %}style="display:none"{% endif %}>
-	                Bu adayı destekliyorsun!
-	                <a class="support" data-username="{{ object.username }}" data-support="-">Desteğimi çekmek istiyorum.</a>
-	            </div>
-	            <div class="support-action" id="id_div_support" {% if object in user.supports.all %}style="display:none"{% endif %}>
-	                <a class="btn support" id="btn_destek" data-username="{{ object.username }}" data-support="+">Beni temsil eder, destekliyorum!</a>
-	            </div>
-	            {% endif %}
+
 
 	            {% if object.about_me %}
 	                <h3>Hakkında</h3>
