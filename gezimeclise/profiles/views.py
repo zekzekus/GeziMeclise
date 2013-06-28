@@ -1,9 +1,9 @@
 from django.db.models import Q
 from django.http import HttpResponse
-from django.views.generic import View, ListView, DetailView, UpdateView,\
-    FormView
-from gezimeclise.profiles.models import GeziUser, Report
+from django.views.generic import View, ListView, DetailView, UpdateView, FormView
+from gezimeclise.profiles.models import GeziUser, Report, Region
 from gezimeclise.profiles.forms import ProfileUpdateForm, ReportForm
+from taggit.models import Tag
 
 
 class FriendsListView(ListView):
@@ -28,91 +28,26 @@ class ProfileListView(ListView):
         if self.request.GET.get('tag'):
             tag = self.request.GET.get("tag")
             qs = qs.filter(tags__name__in=["%s" % tag])
-        if self.request.GET.get('c'):
-            region = self.request.GET.get("r")
-            qs = qs.filter(region__name__icontains=region)
-        else:
-            return qs
-
-def discover(request, tag_slug=None, loc_slug=None, tag_or_loc_slug=None):
-    """
-    Parameters to filter content are:
-        domain_user: comes from the subdomain, attached to the request object by relevant middleware
-        tag or location: if there is one slug, it can be either a location or a tag
-        tag and location: if there are two slugs, one is the location and the other is the tag
-
-    Query string parameters for filtering and sorting:
-        list_type (l): all, own, like (if domain user exists)
-        sorting (s): last / popular
-        query (q): search query string
-    """
-
-    # tag / location match
-    # we may have both tag and loc slugs or just one tag_or_loc slug
-    location = None
-    tag = None
-    if tag_slug and loc_slug:
-        tag = get_object_or_404(Tag, slug=tag_slug)
-        location = get_object_or_404(Location, slug=loc_slug)
-    if tag_or_loc_slug:
-        try:
-            location = Location.objects.get(slug=tag_or_loc_slug)
-        except Location.DoesNotExist:
+        if self.request.GET.get('r'):
             try:
-                tag = Tag.objects.get(slug=tag_or_loc_slug)
-            except Tag.DoesNotExist:
-                raise Http404
+                region_id = int(self.request.GET.get("r"))
+            except ValueError:
+                pass
+            else:
+                qs = qs.filter(region__id=region_id)
 
-    sorting = request.GET.get('s')
-    list_type = request.GET.get('l')
-    query = request.GET.get('q')
+        if self.request.GET.get('s'):
+            sorting = self.request.GET.get('s')
+            if sorting == 'new':
+                qs = qs.order_by('')
 
-    posts = Post.objects.discover(user=request.domain_user, tag=tag, location=location,
-                                  list_type=list_type, query=query)
-
-    last_time = None
-    if posts.count() > 0:
-        last_time = posts[0].time
-
-    if sorting == 'pop':
-        posts = posts.order_by('-featured', '-rank')
-
-    post_count = posts.count()
-
-    context = {'tag': tag,
-               'location': location,
-               'list_type': list_type,
-               'sorting': sorting,
-               'last_time': last_time,
-               'post_count': post_count}
-
-    if not request.is_ajax():
-        # skip this part for ajax requests by the infinite scroll
-
-        # tags of the posts listed
-        tags = Tag.objects.none()
-        for post in posts[:60]:
-            tags |= post.tags.all()
-        tags = tags.distinct()
-
-        # locations of the posts listed
-        loc_ids = set(posts.values_list('location', flat=True))
-        locations = Location.objects.filter(id__in=loc_ids)
-
-        context.update({'tags': tags, 'locations': locations})
-
-    paginator = Paginator(posts, 15)
-    page = request.GET.get('p', 1)
-    try:
-        posts = paginator.page(page)
-    except:
-        # deliver the first page if page is invalid
-        posts = Post.objects.none()
-
-    context.update({'posts': posts})
-
-    return render_to_response('usercontent/discover.html', context,
-                               context_instance=RequestContext(request))
+        return qs
+    
+    def get_context_data(self, **kwargs):
+        context = super(ProfileListView, self).get_context_data(**kwargs)
+        context['tags'] = Tag.objects.all()
+        context['regions'] = Region.objects.all()
+        return context
 
 
 class ProfileDetailView(DetailView):
