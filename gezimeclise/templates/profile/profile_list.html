@@ -15,11 +15,11 @@
 
      <div class="hgroup">
         <div class="row">
-           <div class="{% if domain_user %}span8{% else %}span9{% endif %}">
-              <h1>adaylar</h1>
+           <div class="span9">
+              <h1>üyeler</h1>
               <div class="post-sub">
 
-                <span class="text-warning"><i class="icon-th"></i> {{ post_count }} kullanıcı</span>
+                <span class="text-warning"><i class="icon-th"></i> {{ object_list.count }} üye</span>
 
                 {% if object_list %}
                 <span class="dropdown">
@@ -34,16 +34,8 @@
               </div>
            </div>
 
-           {% if object_list %}
            <div class="span3">
-             <form>
-               <div class="input-append pull-right">
-                 <input class="span2" type="text" name="q" placeholder="Liste içinde ara">
-                 <button class="btn" type="submit"><i class="icon-search"></i></button>
-               </div>
-             </form>
            </div>
-           {% endif %}
 
         </div>
 
