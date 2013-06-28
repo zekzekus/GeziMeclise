@@ -1,9 +1,9 @@
 from django.db.models import Q
 from django.http import HttpResponse
-from django.views.generic import View, ListView, DetailView, UpdateView,\
-    FormView
-from gezimeclise.profiles.models import GeziUser, Report
+from django.views.generic import View, ListView, DetailView, UpdateView, FormView
+from gezimeclise.profiles.models import GeziUser, Report, Region
 from gezimeclise.profiles.forms import ProfileUpdateForm, ReportForm
+from taggit.models import Tag
 
 
 class FriendsListView(ListView):
@@ -28,17 +28,26 @@ class ProfileListView(ListView):
         if self.request.GET.get('tag'):
             tag = self.request.GET.get("tag")
             qs = qs.filter(tags__name__in=["%s" % tag])
-        if self.request.GET.get('c'):
-            region = self.request.GET.get("r")
-            qs = qs.filter(region__name__icontains=region)
-        if self.request.GET.get('ordering'):
-            ordering = self.request.GET.get('q')
-            if ordering == "pop":
-                import ipdb
-                ipdb.set_trace()
+        if self.request.GET.get('r'):
+            try:
+                region_id = int(self.request.GET.get("r"))
+            except ValueError:
+                pass
+            else:
+                qs = qs.filter(region__id=region_id)
 
-        else:
-            return qs
+        if self.request.GET.get('s'):
+            sorting = self.request.GET.get('s')
+            if sorting == 'new':
+                qs = qs.order_by('')
+
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileListView, self).get_context_data(**kwargs)
+        context['tags'] = Tag.objects.all()
+        context['regions'] = Region.objects.all()
+        return context
 
 
 class ProfileDetailView(DetailView):

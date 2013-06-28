@@ -5,21 +5,17 @@
 {% block content %}
 
 
-
-    <div class="clearfix"></div>
-
-
 <section id="discover_title">
 
     {% with request.GET.q as query %}
 
      <div class="hgroup">
         <div class="row">
-           <div class="{% if domain_user %}span8{% else %}span9{% endif %}">
-              <h1>adaylar</h1>
+           <div class="span9">
+              <h1>üyeler</h1>
               <div class="post-sub">
 
-                <span class="text-warning"><i class="icon-th"></i> {{ post_count }} kullanıcı</span>
+                <span class="text-warning"><i class="icon-th"></i> {{ paginator.count }} üye</span>
 
                 {% if object_list %}
                 <span class="dropdown">
@@ -34,16 +30,15 @@
               </div>
            </div>
 
-           {% if object_list %}
            <div class="span3">
-             <form>
-               <div class="input-append pull-right">
-                 <input class="span2" type="text" name="q" placeholder="Liste içinde ara">
-                 <button class="btn" type="submit"><i class="icon-search"></i></button>
-               </div>
-             </form>
+		       <div class="input-append pull-right">
+		           <form id="search" class="pull-left navbar-search" action="{% url "profile_list" %}{% update_get drop q %}">
+			         <input type="text" name="q" placeholder="Ara" value="{{ request.GET.q }}">
+					<button class="btn" type="submit"><i class="icon-search"></i></button>
+		           </form>
+		       </div>
+		
            </div>
-           {% endif %}
 
         </div>
 
@@ -89,17 +84,35 @@
 
     </div>
 
+
+    <div class="span3">
+    	<select id="region_select">
+   			<option value="">her yer</option>
+    		{% for region in regions %}
+    			<option value="{{ region.id }}" {% if request.GET.r == region.id|stringformat:"s" %}selected{% endif %}>{{ region.name }}</option>
+    		{% endfor %}
+    	</select>
+
+		<div>
+  		{% for tag in tags %}
+  			<a href="{% update_get with tag=tag.name %}" class="label">{{ tag.name }}</a>
+  		{% endfor %}
+  		</div>
+
+    </div>
+
+
 </div>
 
 
-{% if posts.has_previous or posts.has_next %}
+{% if is_paginated %}
 <div class="pagination">
   <ul>
-    {% if posts.has_previous %}
-      <li><a href="{% update_get with p=posts.previous_page_number %}">&laquo;</a></li>
+    {% if page_obj.has_previous %}
+      <li><a href="{% update_get with page=page_obj.previous_page_number %}">&laquo;</a></li>
     {% endif %}
-    {% if posts.has_next %}
-      <li><a href="{% update_get with p=posts.next_page_number %}" class="next">&raquo;</a></li>
+    {% if page_obj.has_next %}
+      <li><a href="{% update_get with page=page_obj.next_page_number %}" class="next">&raquo;</a></li>
     {% endif %}
   </ul>
 </div>
@@ -111,6 +124,16 @@
 
 
 {% block extra_bottom %}
+
+{# search filters #}
+<script>
+
+$('#region_select').change(function() {
+	var region_id = $("option:selected", this).val();
+	window.location.replace('{% update_get drop r %}&r=' + region_id);
+});
+
+</script>
 
 {# infinite scroll #}
 <script>

@@ -67,7 +67,7 @@
 				            {% url "profile_list" as url_profiles %}
 				            {% with len_slice=url_profiles|length|stringformat:"s" %}
 				            <li {% if request.get_full_path == url_profiles %}class="active"{% endif %}>
-				            	<a href="{{ url_profiles }}">Çapulcular</a>
+				            	<a href="{{ url_profiles }}">Üyeler</a>
 				            </li>
 				            {% endwith %}
 
@@ -77,12 +77,6 @@
 				            	<a href="{{ url_blog }}">Yazılar</a>
 				            </li>
 				            {% endwith %}
-
-                            <li>
-                                <form id="search" class="pull-left navbar-search" action="{% url "profile_list" %}">
-                                    <input type="text" name="q" placeholder="Ara">
-                                </form>
-                            </li>
 
                             {% if user.is_authenticated %}
 
