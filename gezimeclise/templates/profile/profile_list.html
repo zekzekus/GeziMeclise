@@ -33,7 +33,7 @@
            <div class="span3">
 		       <div class="input-append pull-right">
 		           <form id="search" class="pull-left navbar-search" action="{% url "profile_list" %}{% update_get drop q %}">
-		         <input type="text" name="q" placeholder="Ara" value="{{ request.GET.q }}">
+			         <input type="text" name="q" placeholder="Ara" value="{{ request.GET.q }}">
 					<button class="btn" type="submit"><i class="icon-search"></i></button>
 		           </form>
 		       </div>
@@ -92,6 +92,13 @@
     			<option value="{{ region.id }}" {% if request.GET.r == region.id|stringformat:"s" %}selected{% endif %}>{{ region.name }}</option>
     		{% endfor %}
     	</select>
+
+		<div>
+  		{% for tag in tags %}
+  			<a href="{% update_get with tag=tag.name %}" class="label">{{ tag.name }}</a>
+  		{% endfor %}
+  		</div>
+
     </div>
 
 
