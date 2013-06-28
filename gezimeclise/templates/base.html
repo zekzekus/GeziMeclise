@@ -78,13 +78,6 @@
 				            </li>
 				            {% endwith %}
 
-                            <li class="input-append pull-right">
-                                <form id="search" class="pull-left navbar-search" action="{% url "profile_list" %}">
-            		                <input type="text" name="q" placeholder="Ara">
-					                <button class="btn" type="submit"><i class="icon-search"></i></button>
-                                </form>
-                            </li>
-
                             {% if user.is_authenticated %}
 
 					            {% url "notifications" as url_notifications %}
