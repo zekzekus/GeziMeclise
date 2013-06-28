@@ -1,5 +1,4 @@
-/*!
-Theme Name: {re}start
+/*! Theme Name: {re}start
 Theme URI: http://www.leonart.gr/htmlthemes/restart/
 Description: Multipurpose HTML Template based on twitter bootstrap.
 Version: 1.0
@@ -4547,6 +4546,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-form .radio,
 .navbar-form .checkbox {
   margin-top: 5px;
+  height: 30px;
 }
 .navbar-form input,
 .navbar-form select,
