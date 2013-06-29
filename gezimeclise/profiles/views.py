@@ -40,8 +40,8 @@ class ProfileListView(ListView):
         if self.request.GET.get('s'):
             sorting = self.request.GET.get('s')
             if sorting == 'pop':
-                qs = qs.annotate(number_of_supports=Count('supports'))
-                qs = qs.order_by('number_of_supports')
+                qs = qs.annotate(number_of_supporters=Count('supporters'))
+                qs = qs.order_by('-number_of_supporters')
             elif sorting == "son":
                 qs = qs.order_by('-date_joined')
         return qs
