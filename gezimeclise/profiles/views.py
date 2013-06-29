@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.db.models import Count
 from django.http import HttpResponse
 from django.views.generic import View, ListView, DetailView, UpdateView, FormView
 from gezimeclise.profiles.models import GeziUser, Report, Region
@@ -38,15 +39,18 @@ class ProfileListView(ListView):
 
         if self.request.GET.get('s'):
             sorting = self.request.GET.get('s')
-            if sorting == 'new':
-                qs = qs.order_by('')
-
+            if sorting == 'pop':
+                qs = qs.annotate(number_of_supports=Count('supports'))
+                qs = qs.order_by('number_of_supports')
+            elif sorting == "son":
+                qs = qs.order_by('-date_joined')
         return qs
 
     def get_context_data(self, **kwargs):
         context = super(ProfileListView, self).get_context_data(**kwargs)
         context['tags'] = Tag.objects.all()
         context['regions'] = Region.objects.all()
+        context['sorting'] = self.request.GET.get('s')
         return context
 
 

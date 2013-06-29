@@ -19,9 +19,9 @@
 
                 {% if object_list %}
                 <span class="dropdown">
-                  <a href="#sorting" class="dropdown-toggle text-success" data-toggle="dropdown">{% if sorting == 'pop' %}popüler{% else %}son{% endif %} <b class="caret"></b></a>
+                  <a href="#sorting" class="dropdown-toggle text-success" data-toggle="dropdown">{% if sorting == 'pop' %}popüler{% elif sorting == "son" %}son {% else %}Sırala{% endif %} <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="{% update_get drop s %}">son</a></li>
+                    <li><a href="{% update_get with s='son' %}">son</a></li>
                     <li><a href="{% update_get with s='pop' %}">popüler</a></li>
                   </ul>
                 </span>
@@ -37,7 +37,7 @@
 					<button class="btn" type="submit"><i class="icon-search"></i></button>
 		           </form>
 		       </div>
-		
+
            </div>
 
         </div>

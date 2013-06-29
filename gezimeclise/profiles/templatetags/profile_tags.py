@@ -240,17 +240,16 @@ def thumb_layout(photos):
             photo_last = landscapes[1]
 
         return mark_safe('''%(thumbs_row_layout)s''' %
-                        {
-                            'thumbs_row_layout': render_to_string('usercontent/thumbs_layout.html',
-                                {
-                                    'photo_first': photo_first,
-                                    'photo_last': photo_last,
-                                    'span_first': span_first,
-                                    'span_last': span_last,
-                                    'photo_thumbs': photo_thumbs,
-                                    'other_photos': other_photos
-                                })
-                        })
+                         {'thumbs_row_layout': render_to_string(
+                             'usercontent/thumbs_layout.html',
+                             {'photo_first': photo_first,
+                              'photo_last': photo_last,
+                              'span_first': span_first,
+                              'span_last': span_last,
+                              'photo_thumbs': photo_thumbs,
+                              'other_photos': other_photos
+                              })
+                          })
 
 
 @register.filter(is_safe=False)
@@ -260,3 +259,4 @@ def merge_string(value, arg):
         return str(value) + str(arg)
     except (TypeError):
         return ''
+
