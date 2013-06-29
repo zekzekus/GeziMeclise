@@ -13,7 +13,29 @@ class FriendsListView(ListView):
     template_name = "profile/friends_list.html"
 
     def get_queryset(self):
-        return GeziUser.get_registered_friends(self.request.user)
+        qs = GeziUser.get_registered_friends(self.request.user)
+        if self.request.GET.get('q'):
+            q = self.request.GET.get('q')
+            qs = qs.filter(Q(first_name__icontains=q) | Q(last_name__icontains=q))
+        if self.request.GET.get('tag'):
+            tag = self.request.GET.get("tag")
+            qs = qs.filter(tags__name__in=["%s" % tag])
+        if self.request.GET.get('r'):
+            try:
+                region_id = int(self.request.GET.get("r"))
+            except ValueError:
+                pass
+            else:
+                qs = qs.filter(region__id=region_id)
+
+        if self.request.GET.get('s'):
+            sorting = self.request.GET.get('s')
+            if sorting == 'pop':
+                qs = qs.annotate(number_of_supporters=Count('supporters'))
+                qs = qs.order_by('-number_of_supporters')
+            elif sorting == "son":
+                qs = qs.order_by('-date_joined')
+        return qs
 
 
 class ProfileListView(ListView):
