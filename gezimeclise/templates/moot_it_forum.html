@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+      <h3> Forum </h3>
+      <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!-- (1) force latest IE rendering engine: http://goo.gl/tf4JH -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <!-- (1) Moot look and feel -->
+      <link rel="stylesheet" href="https://cdn.moot.it/1/moot.css">
+
+      <!-- (4) Custom CSS -->
+      <style>
+      body {
+         font-family: "myriad pro", tahoma, verdana, arial, sans-serif;
+         margin: 0; padding: 0;
+      }
+
+      .moot {
+         font-size: 18px;
+      }
+      </style>
+
+      <!-- (1) Moot depends on jQuery v1.7 or greater -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+      <!-- (1) Moot client application -->
+      <script src="https://cdn.moot.it/1/moot.min.js"></script>
+
+
+      <!-- (2) Placeholder for the forum. The forum will be rendered inside this element -->
+      <a class="moot" href="https://moot.it/i/gezimeclise">gezimeclise forums</a>
+
+      <!--
+         (2) Example tag for commenting, put it on a different page
+         <a class="moot" href="https://moot.it/i/gezimeclise/blog#my-blog-entry">
+            Comments for my blog entry
+         </a>
+
+         (2) Example tag for threaded commenting
+         <a class="moot" href="https://moot.it/i/gezimeclise/blog/my-large-blog-entry">
+            Comments for my blog entry
+         </a>
+
+         Moot paths are awesome: https://moot.it/docs/?gezimeclise#path
+      -->
+{% endblock %}
