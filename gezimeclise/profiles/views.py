@@ -7,51 +7,29 @@ from gezimeclise.profiles.forms import ProfileUpdateForm, ReportForm
 from taggit.models import Tag
 
 
-class FriendsListView(ListView):
-
-    paginate_by = 15
-    template_name = "profile/friends_list.html"
-
-    def get_queryset(self):
-        qs = GeziUser.get_registered_friends(self.request.user)
-        if self.request.GET.get('q'):
-            q = self.request.GET.get('q')
-            qs = qs.filter(Q(first_name__icontains=q) | Q(last_name__icontains=q))
-        if self.request.GET.get('tag'):
-            tag = self.request.GET.get("tag")
-            qs = qs.filter(tags__name__in=["%s" % tag])
-        if self.request.GET.get('r'):
-            try:
-                region_id = int(self.request.GET.get("r"))
-            except ValueError:
-                pass
-            else:
-                qs = qs.filter(region__id=region_id)
-
-        if self.request.GET.get('s'):
-            sorting = self.request.GET.get('s')
-            if sorting == 'pop':
-                qs = qs.annotate(number_of_supporters=Count('supporters'))
-                qs = qs.order_by('-number_of_supporters')
-            elif sorting == "son":
-                qs = qs.order_by('-date_joined')
-        return qs
-
-
 class ProfileListView(ListView):
     model = GeziUser
     paginate_by = 15
     template_name = "profile/profile_list.html"
 
     def get_queryset(self):
-        qs = super(ProfileListView, self).get_queryset()
+        if self.request.GET.get('f') == 'arkadas':
+            # 
+            qs = GeziUser.get_registered_friends(self.request.user)
+        else:
+            qs = super(ProfileListView, self).get_queryset()
+        # exclude non facebook users
+        qs = qs.exclude(facebook_id__isnull=True)
         if self.request.GET.get('q'):
+            # search
             q = self.request.GET.get('q')
             qs = qs.filter(Q(first_name__icontains=q) | Q(last_name__icontains=q))
         if self.request.GET.get('tag'):
+            # tag filter
             tag = self.request.GET.get("tag")
             qs = qs.filter(tags__name__in=["%s" % tag])
         if self.request.GET.get('r'):
+            # region filter
             try:
                 region_id = int(self.request.GET.get("r"))
             except ValueError:
@@ -60,6 +38,7 @@ class ProfileListView(ListView):
                 qs = qs.filter(region__id=region_id)
 
         if self.request.GET.get('s'):
+            # sorting
             sorting = self.request.GET.get('s')
             if sorting == 'pop':
                 qs = qs.annotate(number_of_supporters=Count('supporters'))

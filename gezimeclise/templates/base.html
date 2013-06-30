@@ -93,7 +93,7 @@
 					              </a>
                         {% if user.is_authenticated %}
 					              <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-					                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'friends_list' %}">Arkadaşlar</a></li>
+					                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'profile_list' %}?f=arkadas">Arkadaşlar</a></li>
 					                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'profile_detail' user.username %}">Profil</a></li>
 					                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'profile_update' %}">Profili Güncelle</a></li>
 					                <li role="presentation" class="divider"></li>
