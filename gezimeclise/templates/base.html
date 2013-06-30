@@ -64,6 +64,12 @@
                     </a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
+
+                    {% url "forum" as forum %}
+                    <li {% if request.get_full_path == forum %}class="active"{% endif %}>
+                      <a href="{% url 'forum' %}">forum</a>
+                    </li>
+
 				            {% url "profile_list" as url_profiles %}
 				            {% with len_slice=url_profiles|length|stringformat:"s" %}
 				            <li {% if request.get_full_path == url_profiles %}class="active"{% endif %}>
