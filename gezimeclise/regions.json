@@ -1,0 +1,563 @@
+[
+{
+    "model":"profiles.region",
+    "pk": 1,
+    "fields": {
+        "name": "Adana"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 2,
+    "fields": {
+        "name": "Adıyaman"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 3,
+    "fields": {
+        "name": "Afyonkarahisar"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 4,
+    "fields": {
+        "name": "Ağrı"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 5,
+    "fields": {
+        "name": "Amasya"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 6,
+    "fields": {
+        "name": "Ankara"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 7,
+    "fields": {
+        "name": "Antalya"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 8,
+    "fields": {
+        "name": "Artvin"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 9,
+    "fields": {
+        "name": "Aydın"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 10,
+    "fields": {
+        "name": "Balıkesir"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 11,
+    "fields": {
+        "name": "Bilecik"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 12,
+    "fields": {
+        "name": "Bingöl"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 13,
+    "fields": {
+        "name": "Bitlis"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 14,
+    "fields": {
+        "name": "Bolu"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 15,
+    "fields": {
+        "name": "Burdur"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 16,
+    "fields": {
+        "name": "Bursa"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 17,
+    "fields": {
+        "name": "Çanakkale"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 18,
+    "fields": {
+        "name": "Çankırı"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 19,
+    "fields": {
+        "name": "Çorum"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 20,
+    "fields": {
+        "name": "Denizli"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 21,
+    "fields": {
+        "name": "Diyarbakır"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 22,
+    "fields": {
+        "name": "Edirne"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 23,
+    "fields": {
+        "name": "Elazığ"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 24,
+    "fields": {
+        "name": "Erzincan"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 25,
+    "fields": {
+        "name": "Erzurum"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 26,
+    "fields": {
+        "name": "Eskişehir"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 27,
+    "fields": {
+        "name": "Gaziantep"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 28,
+    "fields": {
+        "name": "Giresun"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 29,
+    "fields": {
+        "name": "Gümüşhane"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 30,
+    "fields": {
+        "name": "Hakkari"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 31,
+    "fields": {
+        "name": "Hatay"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 32,
+    "fields": {
+        "name": "Isparta"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 33,
+    "fields": {
+        "name": "Mersin"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 34,
+    "fields": {
+        "name": "İstanbul"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 35,
+    "fields": {
+        "name": "İzmir"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 36,
+    "fields": {
+        "name": "Kars"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 37,
+    "fields": {
+        "name": "Kastamonu"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 38,
+    "fields": {
+        "name": "Kayseri"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 39,
+    "fields": {
+        "name": "Kırklareli"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 40,
+    "fields": {
+        "name": "Kırşehir"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 42,
+    "fields": {
+        "name": "Konya"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 43,
+    "fields": {
+        "name": "Kütahya"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 44,
+    "fields": {
+        "name": "Malatya"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 45,
+    "fields": {
+        "name": "Manisa"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 46,
+    "fields": {
+        "name": "Kahramanmaraş"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 47,
+    "fields": {
+        "name": "Mardin"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 48,
+    "fields": {
+        "name": "Muğla"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 49,
+    "fields": {
+        "name": "Muş"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 50,
+    "fields": {
+        "name": "Nevşehir"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 51,
+    "fields": {
+        "name": "Niğde"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 52,
+    "fields": {
+        "name": "Ordu"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 53,
+    "fields": {
+        "name": "Rize"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 54,
+    "fields": {
+        "name": "Sakarya"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 55,
+    "fields": {
+        "name": "Samsun"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 56,
+    "fields": {
+        "name": "Siirt"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 57,
+    "fields": {
+        "name": "Sinop"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 58,
+    "fields": {
+        "name": "Sivas"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 59,
+    "fields": {
+        "name": "Tekirdağ"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 60,
+    "fields": {
+        "name": "Tokat"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 61,
+    "fields": {
+        "name": "Trabzon"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 62,
+    "fields": {
+        "name": "Tunceli"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 63,
+    "fields": {
+        "name": "Şanlıurfa"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 64,
+    "fields": {
+        "name": "Uşak"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 65,
+    "fields": {
+        "name": "Van"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 66,
+    "fields": {
+        "name": "Yozgat"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 67,
+    "fields": {
+        "name": "Zonguldak"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 68,
+    "fields": {
+        "name": "Aksaray"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 69,
+    "fields": {
+        "name": "Bayburt"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 70,
+    "fields": {
+        "name": "Karaman"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 71,
+    "fields": {
+        "name": "Kırıkkale"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 72,
+    "fields": {
+        "name": "Batman"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 73,
+    "fields": {
+        "name": "Şırnak"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 74,
+    "fields": {
+        "name": "Bartın"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 75,
+    "fields": {
+        "name": "Ardahan"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 76,
+    "fields": {
+        "name": "Iğdır"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 77,
+    "fields": {
+        "name": "Yalova"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 78,
+    "fields": {
+        "name": "Karabük"
+    }
+},
+{
+
+    "model":"profiles.region",
+    "pk": 79,
+    "fields": {
+        "name": "Kilis"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 80,
+    "fields": {
+        "name": "Osmaniye"
+    }
+},
+{
+    "model":"profiles.region",
+    "pk": 81,
+    "fields": {
+        "name": "Düzce"
+    }
+},
+]
