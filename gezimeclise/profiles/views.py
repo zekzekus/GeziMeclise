@@ -70,10 +70,12 @@ class ProfileDetailView(DetailView):
     def get_queryset(self):
         cache = get_cache('default')
         if cache.get('user_detail-%s' % self.request.user.username):
-            cache.get('user_detail-%s' % self.request.user.username)
+            qs = cache.get('user_detail-%s' % self.request.user.username)
+
         else:
             qs = super(ProfileDetailView, self).get_queryset()
             cache.set('user_detail-%s' % self.request.user.username, qs, 600)
+        return qs
 
 
 class ProfileUpdateView(UpdateView):
