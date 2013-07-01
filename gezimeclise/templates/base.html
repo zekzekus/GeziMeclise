@@ -65,11 +65,6 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
 
-                    {% url "forum" as forum %}
-                    <li {% if request.get_full_path == forum %}class="active"{% endif %}>
-                      <a href="{% url 'forum' %}">forum</a>
-                    </li>
-
 				            {% url "profile_list" as url_profiles %}
 				            {% with len_slice=url_profiles|length|stringformat:"s" %}
 				            <li {% if request.get_full_path == url_profiles %}class="active"{% endif %}>
@@ -120,8 +115,9 @@
           </div>
 
           <div id="social_media_wrapper">
-              <a href="http://facebook.com/gezimeclise"><i class="icon icon-facebook"></i></a>
-              <a href="http://twitter.com/gezimeclise"><i class="icon icon-twitter"></i></a>
+			<a href="{% url 'forum' %}" title="geri bildirim"><i class="icon icon-bullhorn"></i></a>
+              <a href="http://facebook.com/gezimeclise" title="facebook"><i class="icon icon-facebook"></i></a>
+              <a href="http://twitter.com/gezimeclise" title="twitter"><i class="icon icon-twitter"></i></a>
               <!--a href="#  "><i class="icon icon-google-plus"></i></a-->
           </div>
 
