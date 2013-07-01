@@ -98,7 +98,7 @@
 					                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'profile_detail' user.username %}">Profil</a></li>
 					                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'profile_update' %}">Profili Güncelle</a></li>
 					                <li role="presentation" class="divider"></li>
-					                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'facebook_disconnect' %}">Çıkış Yap</a></li>
+					                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'auth_logout' %}">Çıkış Yap</a></li>
 					              </ul>
 					            </li>
                         {% endif %}
