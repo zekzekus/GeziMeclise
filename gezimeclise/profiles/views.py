@@ -1,7 +1,9 @@
 from django.db.models import Q
 from django.db.models import Count
 from django.http import HttpResponse
-from django.views.generic import View, ListView, DetailView, UpdateView, FormView
+from django.views.generic import (View, ListView, DetailView,
+                                  UpdateView, FormView, DeleteView)
+from django.core.cache import get_cache
 from gezimeclise.profiles.models import GeziUser, Report, Region
 from gezimeclise.profiles.forms import ProfileUpdateForm, ReportForm
 from taggit.models import Tag
@@ -13,11 +15,15 @@ class ProfileListView(ListView):
     template_name = "profile/profile_list.html"
 
     def get_queryset(self):
-        if self.request.GET.get('f') == 'arkadas':
-            # 
-            qs = GeziUser.get_registered_friends(self.request.user)
+        cache = get_cache('default')
+        if cache.get('profile_list'):
+            qs = cache.get('profile_list')
         else:
             qs = super(ProfileListView, self).get_queryset()
+            cache.set('profile_list', qs, 600)
+
+        if self.request.GET.get('f') == 'arkadas':
+            qs = GeziUser.get_registered_friends(self.request.user)
         # exclude non facebook users
         qs = qs.exclude(facebook_id__isnull=True)
         if self.request.GET.get('q'):
@@ -60,6 +66,14 @@ class ProfileDetailView(DetailView):
     slug_field = 'username'
     slug_url_kwarg = 'username'
     template_name = "profile/profile_detail.html"
+
+    def get_queryset(self):
+        cache = get_cache('default')
+        if cache.get('user_detail-%s' % self.request.user.username):
+            cache.get('user_detail-%s' % self.request.user.username)
+        else:
+            qs = super(ProfileDetailView, self).get_queryset()
+            cache.set('user_detail-%s' % self.request.user.username, qs, 600)
 
 
 class ProfileUpdateView(UpdateView):
@@ -104,3 +118,15 @@ class ProfileSupport(View):
         else:
             # users cannot support themselves
             return HttpResponse("0")
+
+
+class ProfileDelete(DeleteView):
+
+    template_name = "profile/delete_profile.html"
+    success_url = "/"
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def post(self, *args, **kwargs):
+        return self.delete(*args, **kwargs)

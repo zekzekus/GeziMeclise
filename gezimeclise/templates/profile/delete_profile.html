@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3> Profilinizi silmek istiyor musunuz? </h3>
+    <form method="get" action="/">{% csrf_token %}
+      <input class="btn" type="submit" value="Hayır" />
+    </form>
+    <form method="post" action="{% url 'profile_delete' %}">{% csrf_token %}
+      <input class="btn btn-danger" type="submit" value="Profilini Sil" onclick="proceed();"/>
+    </form>
+
+{% endblock %}
+
+{% block footer %}
+<script>
+function proceed (){
+    $.post('/kullanicilar/sil/', function(data){
+        console.log(data)
+    })
+}
+</script>
+{% endblock %}
