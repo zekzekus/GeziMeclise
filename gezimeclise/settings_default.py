@@ -134,10 +134,3 @@ BROKER_URL = 'amqp://guest:guest@localhost:5672//'
 
 JQUERY_URL = 'js/jquery1.6-min.js'
 FACEBOOK_STORE_LOCAL_IMAGE = False
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-    }
-}
