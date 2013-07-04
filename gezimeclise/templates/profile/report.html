@@ -2,7 +2,7 @@
 {% block content %}
 <h3> Kullanıcı Şikayet formu </h3>
 <form method="post" action="">{% csrf_token %}
-Neden : {{ form  }}
+Neden : {{ form.topic }}
 <br>
 <button type="submit" class="btn">Kaydet</button>
 </form>
