@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.db.models import Count
 from django.http import HttpResponse
 from django.views.generic import (View, ListView, DetailView,
-                                  UpdateView, FormView, DeleteView)
+                                  CreateView, UpdateView, DeleteView)
 from django.core.cache import get_cache
 from gezimeclise.profiles.models import GeziUser, Report, Region
 from gezimeclise.profiles.forms import ProfileUpdateForm, ReportForm
@@ -90,17 +90,18 @@ class ProfileUpdateView(UpdateView):
         return self.request.user
 
 
-class ReportCreateView(FormView):
+class ReportCreateView(CreateView):
     model = Report
     success_url = "/"
     form_class = ReportForm
     template_name = "profile/report.html"
 
     def form_valid(self, form):
-        form = form.save(commit=False)
-        form.reporter = self.request.user
-        form.save()
-        return HttpResponse(self.success_url)
+        self.object = form.save(commit=False)
+        self.object.reporter = self.request.user
+        self.object.reported = GeziUser.objects.get(username=self.request.GET.get('username', None))
+        self.object.save()
+        return super(ReportCreateView, self).form_valid(form)
 
 
 class ProfileSupport(View):

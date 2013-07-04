@@ -1,4 +1,4 @@
-# coding: utf-8
+    # coding: utf-8
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -9,8 +9,8 @@ from django_facebook.models import FacebookUser
 from django_facebook.signals import facebook_post_store_friends
 
 
-REPORTTOPICS = ((1, "FAKE ACCOUNT"),
-                (2, "BAD LANGUAGE")),
+REPORTTOPICS = ((1, "SAHTE HESAP"),
+                (2, "KÖTÜ LİSAN KULLANIMI"))
 
 
 class Region(models.Model):
@@ -54,7 +54,7 @@ class Report(models.Model):
         unique_together = ('reporter', 'reported', 'topic')
 
     def __unicode__(self):
-        return str(self.reporter + self.reported + self.topic)
+        return str(self.id)
 
     def deactivate_user(self):
         self.reporter.is_active = False
