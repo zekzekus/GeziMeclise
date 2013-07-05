@@ -67,7 +67,8 @@ DJANGO_APPS = (
 GEZI_APPS = (
     'gezimeclise.profiles',
     'gezimeclise.blog',
-    'gezimeclise.notifications')
+    'gezimeclise.notifications',
+    'gezimeclise.causes')
 
 THIRDPARTY_APPS = (
     'south',
