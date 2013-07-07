@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="main">
+    <div class="container">
+        <section id="blog">
+            <div class="hgroup">
+                <h1> Talepler </h1>
+            </div>
+        {% for i in causes%}
+        <div class="row">
+            <div id="leftcol" class="span8">
+                <article class="post">
+                    <div class="post_header">
+                        <h3 class="post_header">
+                            <a href="single_post_html">{{i.title}}</a>
+                        </h3>
+                        <div class="post_sub">
+                            <i class="icon_time"></i>
+                            {{i.added}}
+                            <i class="icon-comments-alt"></i>
+                            {{i.supported_causes|length}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="post_content">
+                    <p>{{i.description}}</p>
+
+                    <a href="{% url 'cause_detail' slug=i.slug %}" class="btn btn-primary">Talebe git</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+</div>
+</div>
+{% endblock %}

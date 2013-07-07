@@ -16,7 +16,8 @@ urlpatterns = patterns('',
     url(r'^facebook/', include('django_facebook.urls')),
     url(r'^forum/', TemplateView.as_view(template_name="moot_it_forum.html"),
         name="forum"),
-    url(r'^accounts/', include('django_facebook.auth_urls'))
+    url(r'^accounts/', include('django_facebook.auth_urls')),
+    url(r'^talepler/', include('gezimeclise.causes.urls'))
 )
 
 if settings.DEBUG:
