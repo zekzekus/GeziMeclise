@@ -65,13 +65,20 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
 
+				            {% url "cause_list" as url_causes %}
+				            {% with len_slice=url_causes|length|stringformat:"s" %}
+				            <li {% if request.get_full_path == url_causes %}class="active"{% endif %}>
+				            	<a href="{{ url_causes }}">Talepler</a>
+				            </li>
+				            {% endwith %}
+
 				            {% url "profile_list" as url_profiles %}
 				            {% with len_slice=url_profiles|length|stringformat:"s" %}
 				            <li {% if request.get_full_path == url_profiles %}class="active"{% endif %}>
 				            	<a href="{{ url_profiles }}">Üyeler</a>
 				            </li>
 				            {% endwith %}
-
+				            
 				            {% url "blog" as url_blog %}
 				            {% with len_slice=url_blog|length|stringformat:"s" %}
 				            <li {% if request.get_full_path == url_blog %}class="active"{% endif %}>
