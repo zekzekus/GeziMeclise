@@ -67,7 +67,14 @@
   		         </div>
   		         <div class="portfolio_description">
   		              <h3><a href="{{ profile.get_absolute_url }}">{{ obj.get_full_name }}</a></h3>
-  		              <p>{{ obj.supporters.all.count }} <i class="icon-thumbs-up"></i></p>
+  		              {% if obj.region %}
+	  		              <p class="text-warning">@{{ obj.region.name }}</p>
+	  		          {% endif %}
+  		              {% with obj.supporters.all.count as supporter_count %}
+	  		              {% if supporter_count > 0 %}
+		  		              <p class="text-success">{{ obj.supporters.all.count }} <i class="icon-thumbs-up"></i></p>
+		  		          {% endif %}
+  		              {% endwith %}
   		         </div>
   		    </div>
 		  {% endfor %}
@@ -77,7 +84,7 @@
 
 		<div class="alert alert-block">
 		  <h3>Kimseyi bulamadık</h3>
-		  Bu kriterlere uygun aday yok!
+		  Bu kriterlere uygun üye yok!
 		</div>
 
 		{% endif %}
