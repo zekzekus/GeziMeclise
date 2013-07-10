@@ -28,4 +28,5 @@ class Comments(models.Model):
         GeziUser, related_name="comment_supporters", blank=True, null=True)
     dislikers = models.ManyToManyField(
         GeziUser, related_name="disliklers", blank=True, null=True)
+    pub_date = models.DateTimeField(auto_now_add=True)
     comment = models.TextField()
