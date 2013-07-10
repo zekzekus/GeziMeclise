@@ -141,13 +141,6 @@ $('#region_select').change(function() {
 
       var $container = $('#content_container');
 
-      $container.isotope({
-        itemSelector : '.portfolio_item',
-        animationOptions: {
-             queue: false
-        }
-      });
-
       $container.infinitescroll({
         navSelector  : '.pagination',    // selector for the paged navigation
         nextSelector : '.pagination a.next',  // selector for the NEXT link (to page 2)
@@ -159,10 +152,6 @@ $('#region_select').change(function() {
             selector: '#loading'
           }
         },
-        // call Isotope as a callback
-        function( newElements ) {
-          $container.isotope( 'appended', $( newElements ) );
-        }
       );
 
     });
