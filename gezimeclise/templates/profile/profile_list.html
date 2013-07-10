@@ -67,14 +67,16 @@
   		         </div>
   		         <div class="portfolio_description">
   		              <h3><a href="{{ profile.get_absolute_url }}">{{ obj.get_full_name }}</a></h3>
+  		              <p>
   		              {% if obj.region %}
-	  		              <p class="text-warning">@{{ obj.region.name }}</p>
+	  		              <span class="text-warning">@{{ obj.region.name }}</span>
 	  		          {% endif %}
   		              {% with obj.supporters.all.count as supporter_count %}
 	  		              {% if supporter_count > 0 %}
-		  		              <p class="text-success">{{ obj.supporters.all.count }} <i class="icon-thumbs-up"></i></p>
+		  		              <span class="text-success">{{ obj.supporters.all.count }} <i class="icon-thumbs-up"></i></span>
 		  		          {% endif %}
   		              {% endwith %}
+  		              </p>
   		         </div>
   		    </div>
 		  {% endfor %}
