@@ -19,10 +19,10 @@
 
                 {% if object_list %}
                 <span class="dropdown">
-                  <a href="#sorting" class="dropdown-toggle text-success" data-toggle="dropdown">{% if sorting == 'pop' %}popüler{% elif sorting == "son" %}son {% else %}Sırala{% endif %} <b class="caret"></b></a>
+                  <a href="#sorting" class="dropdown-toggle text-success" data-toggle="dropdown">{% if sorting == 'pop' %}en çok desteklenenler{% else %}yeni katılanlar{% endif %} <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="{% update_get with s='son' %}">son</a></li>
-                    <li><a href="{% update_get with s='pop' %}">popüler</a></li>
+                    <li><a href="{% update_get with s='son' %}">yeni katılanlar</a></li>
+                    <li><a href="{% update_get with s='pop' %}">en çok desteklenenler</a></li>
                   </ul>
                 </span>
                 {% endif %}
