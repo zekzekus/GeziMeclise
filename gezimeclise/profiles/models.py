@@ -1,12 +1,11 @@
     # coding: utf-8
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from django_facebook.models import FacebookModel
+from django.db.models.signals import post_delete
 from django.contrib.auth.models import AbstractUser, UserManager
-from taggit.managers import TaggableManager
-from django_facebook.models import FacebookUser
+from django_facebook.models import FacebookModel, FacebookUser
 from django_facebook.signals import facebook_post_store_friends
+from taggit.managers import TaggableManager
+from taggit.models import TaggedItem
 
 
 REPORTTOPICS = ((1, "SAHTE HESAP"),
@@ -43,6 +42,12 @@ class GeziUser(AbstractUser, FacebookModel):
         return GeziUser.objects.filter(
             facebook_id__in=FacebookUser.objects.filter(
                 user_id=self.id))
+
+# delete not used tags
+def after_deleting(sender, instance, **kwargs):
+    if TaggedItem.objects.filter(tag=instance.tag).count() == 0:
+        instance.tag.delete()
+post_delete.connect(after_deleting, sender=TaggedItem)
 
 
 class Report(models.Model):
