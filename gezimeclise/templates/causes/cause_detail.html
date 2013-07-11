@@ -21,9 +21,36 @@
                     <br>
                     <div class="post_content">
                     <p>{{cause.description}}</p>
-
                     </div>
                 </article>
+                <h4 style="color:red"> Yorumlar </h4>
+                <div id="post_comments">
+                    {% for comment in comments %}
+                    <div class="row">
+                        <figure class="span1">
+                            <img class="img-circle" src="http://graph.facebook.com/{{comment.commenter.facebook_id}}/picture?type=large">
+                        </figure>
+                        <div class="span7">
+                            <div class="comment_name">{{comment.commenter.username}}
+                            </div>
+                            <div class="comment_date">
+                                <i class="icon-time"></i>
+                                {{comment.pub_date}}
+                            </div>
+                            <div class="the_comment">
+                                <p>{{comment.comment}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <h5>Yorumunuzu girin</h5>
+                 <form method="post" action="." class="horizontal">
+                    {% csrf_token %}
+                    <textarea name="comment" type="text"></textarea>
+                    <button type="submit" class="btn">Gönder</button>
+                 </form>
+                </div>
             </div>
         </div>
     </section>
