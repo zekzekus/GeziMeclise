@@ -47,10 +47,8 @@ class CauseDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(CauseDetailView, self).get_context_data(**kwargs)
         context['comments'] = Comments.objects.filter(cause=self.object)
-        context['commenters'] = [i['commenter'] for i in
-                                 Comments.objects.filter(cause=self.object).
-                                 values('commenter')]
-
+        commenters = [i['commenter'] for i in Comments.objects.filter(cause=self.object).values('commenter')]
+        context['can_comment'] = False if self.request.user.id in commenters else True
         return context
 
     def post(self, request, slug):

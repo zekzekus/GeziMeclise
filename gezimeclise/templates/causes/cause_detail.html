@@ -60,7 +60,7 @@
                         {% endfor %}
                         {% if user.is_authenticated %}
                            {% if request.user in cause.supporters.all %}
-                                {% if request.user.id not in commenters %}
+                                {% if can_comment %}
                         <h5>Yorumunuzu girin</h5>
 
                         <form method="post" action="." class="horizontal">
