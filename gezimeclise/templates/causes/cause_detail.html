@@ -5,55 +5,111 @@
         <section id="blog">
             <div class="hgroup">
                 <h1> {{cause.title}} </h1>
-                        <div class="post_sub">
-                            <i class="icon_time"></i>
-                            {{cause.added}}
-                            <i class="icon-comments-alt"></i>
-                            {{cause.supported_causes|length}}
-                        </div>
+
+                <div class="post_sub">
+                    <i class="icon_time"></i>
+                    {{cause.added}}
+                    <i class="icon-comments-alt"></i>
+                    {{cause.supported_causes|length}}
+                </div>
 
             </div>
-        <div class="row">
-            <div id="leftcol" class="span8">
-                <article class="post">
-                    <div class="post_header">
-                    </div>
-                    <br>
-                    <div class="post_content">
-                    <p>{{cause.description}}</p>
-                    </div>
-                </article>
-                <h4 style="color:red"> Yorumlar </h4>
-                <div id="post_comments">
-                    {% for comment in comments %}
-                    <div class="row">
-                        <figure class="span1">
-                            <img class="img-circle" src="http://graph.facebook.com/{{comment.commenter.facebook_id}}/picture?type=large">
-                        </figure>
-                        <div class="span7">
-                            <div class="comment_name">{{comment.commenter.username}}
-                            </div>
-                            <div class="comment_date">
-                                <i class="icon-time"></i>
-                                {{comment.pub_date}}
-                            </div>
-                            <div class="the_comment">
-                                <p>{{comment.comment}}</p>
+            <div class="row">
+                <div id="leftcol" class="span8">
+                    <article class="post">
+                        <div class="post_header">
+                        </div>
+                            <div class="support-action" id="id_div_unsupport" {% if not request.user in cause.supporters.all %}style="display:none"{% endif %}>
+                    Talebi Destekliyorsun!
+                    <a class="support" data-username="{{ request.user.username }}" data-support="-">Desteğimi çekmek istiyorum.</a>
+                </div>
+                <div class="support-action" id="id_div_support" {% if request.user in cause.supporters.all %}style="display:none"{% endif %}>
+                    <a class="btn support" id="btn_destek" data-username="{{ request.user.username }}" data-support="+">Talebi destekliyorum!</a>
+                </div>
+                        <br>
+                        <div class="post_content">
+                            <p>{{cause.description}}</p>
+                        </div>
+                    </article>
+                    <h4 style="color:red"> Yorumlar </h4>
+
+                    <div id="post_comments">
+                        {% for comment in comments %}
+                        <div class="row">
+                            <figure class="span1">
+                                <img class="img-circle"
+                                     src="http://graph.facebook.com/{{comment.commenter.facebook_id}}/picture?type=large">
+                            </figure>
+                            <div class="span7">
+                                <div class="comment_name">
+                                    {{comment.commenter.username}}
+                                </div>
+                                <div class="comment_date">
+                                    <i class="icon-time"></i>
+                                    {{comment.pub_date}}
+                                </div>
+                                <div class="the_comment">
+                                    <p>{{comment.comment}}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {% endfor %}
+                        {% endfor %}
+                        {% if user.is_authenticated %}
+                           {% if request.user in cause.supporters.all %}
+                        {% if request.user not in comments.commenters %}
+                        <h5>Yorumunuzu girin</h5>
 
-                    <h5>Yorumunuzu girin</h5>
-                 <form method="post" action="." class="horizontal">
-                    {% csrf_token %}
-                    <textarea name="comment" type="text"></textarea>
-                    <button type="submit" class="btn">Gönder</button>
-                 </form>
+                        <form method="post" action="." class="horizontal">
+                            {% csrf_token %}
+                            <textarea name="comment" type="text"></textarea>
+                            <button type="submit" class="btn">Gönder</button>
+                            {% else %}
+                            <p>Daha önceden bir yorum girilmiş</p>
+                            {% endif %}
+                            {% else%}
+                        <p> Yorum yapabilmek için konuyu desteklemeniz gerekiyor! </p>
+                            {% endif %}
+
+                        {% elif not user.is_authenticated %}
+                            <a href="{% url 'facebook_connect' %}">Yorum yapmak
+                                için giriş yapınız!</a>
+                            {% endif %}
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 </div>
-</div>
+{% endblock %}
+{% block extra_bottom %}
+    <script>
+    $(function () {
+	    $('.support').click(function(){
+	    	var username = $(this).data('username');
+	    	var support = $(this).data('support');
+            var slug ="{{cause.slug}}";
+	        $.ajax({
+	            url:"{% url 'cause_support' %}",
+	            type:"POST",
+	            data:{"username":username, 'csrfmiddlewaretoken': '{{csrf_token}}', "support": support,
+                "slug":slug},
+	            dataType:"json",
+	            complete: function(data){
+	            	if (data.responseText == '+') {
+		            	$('#id_div_support').hide();
+		            	$('#id_div_unsupport').show();
+	            	} else if (data.responseText == '-') {
+		            	$('#id_div_unsupport').hide();
+		            	$('#id_div_support').show();
+	            	} else if (data.responseText == '0') {
+		            	console.log(data);
+	            	}
+	            }
+	         });
+            location.reload()
+	    })
+    });
+    </script>
+
 {% endblock %}

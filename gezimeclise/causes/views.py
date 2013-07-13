@@ -1,10 +1,12 @@
+from gezimeclise.profiles.models import GeziUser
+
 from django.views.generic import (ListView,
                                   CreateView,
                                   DetailView,
-                                  UpdateView)
+                                  UpdateView, View)
 from gezimeclise.causes.models import Cause, Comments
 from gezimeclise.causes.forms import CauseUpdateForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 
 class UsersComments(ListView):
@@ -53,7 +55,26 @@ class CauseCreateView(CreateView):
     success_url = "/"
 
     def form_valid(self, form):
+
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
         return super(CauseCreateView, self).form_valid(form)
+
+
+class CauseSupportView(View):
+        def post(self, request):
+            username = request.POST.get('username')
+            support = request.POST.get('support')
+            slug = request.POST.get('slug')
+
+            try:
+                user = GeziUser.objects.get(username=username)
+                cause = Cause.objects.get(slug=slug)
+            except GeziUser.DoesNotExist and Cause.DoesNotExist:
+                return HttpResponse("0")
+            if support == '+':
+                cause.supporters.add(user)
+            elif support == '-':
+                cause.supporters.remove(user)
+            return HttpResponse(support)

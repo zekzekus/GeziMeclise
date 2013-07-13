@@ -30,3 +30,7 @@ class Comments(models.Model):
         GeziUser, related_name="disliklers", blank=True, null=True)
     pub_date = models.DateTimeField(auto_now_add=True)
     comment = models.TextField()
+
+    class Meta:
+        unique_together = (('cause', 'commenter'))
+        verbose_name_plural = "comments"
