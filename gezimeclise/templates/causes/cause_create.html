@@ -22,6 +22,12 @@
     <div class="controls">
       {{form.region}}
     </div>
+    </div>
+  <div class="control-group">
+    <label class="control-label"><h5>Etiketler</h5></label>
+    <div class="controls">
+      {{form.tags}}
+    </div>
   </div>
 <button type="submit" class="btn">Kaydet</button>
  </form>
@@ -30,4 +36,9 @@
 {% block footer %}
 <script src="{{STATIC_URL}}js/jquery-min.js"></script>
 <script src="{{STATIC_URL}}js/jquery.tagsinput.js"></script>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/jquery.tagsinput.css"/>
+<script>
+$('#id_tags').tagsInput();
+</script>
 {% endblock %}
+

@@ -6,5 +6,5 @@ class CauseUpdateForm(ModelForm):
 
     class Meta:
         model = Cause
-        fields = ['title', 'description', 'region']
+        fields = ['title', 'description', 'region', 'tags']
 
