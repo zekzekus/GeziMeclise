@@ -3,15 +3,27 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 PROJECT_DIR = dirname(__file__)
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('onur mat', 'omat@teknolab.org'),
+    ('tuna vargi', 'omat@teknolab.org'),
 )
+
 MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': join(PROJECT_DIR,"gezimeclise.db"),
+        'NAME': join(PROJECT_DIR,"../gezimeclise.db"),
         'USER': '',
         'PASSWORD': '',
         'PORT': '',
     }
 }
+
+FACEBOOK_APP_ID = "1234"
+FACEBOOK_APP_SECRET = "1234"
+
+SECRET_KEY = '1234'
+
+DEFAULT_FROM_EMAIL = 'gezimeclise@gmail.com'
+SERVER_EMAIL = 'gezimeclise@gmail.com'
+#EMAIL_BACKEND = 'django_ses.SESBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
