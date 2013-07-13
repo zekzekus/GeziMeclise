@@ -36,4 +36,4 @@ class Comments(models.Model):
         verbose_name_plural = "comments"
 
     def __unicode__(self):
-        return self.comment[10]
+        return self.comment[:10]

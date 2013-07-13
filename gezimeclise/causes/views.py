@@ -1,3 +1,4 @@
+from django.db.models import Q
 from gezimeclise.profiles.models import GeziUser
 
 from django.views.generic import (ListView,
@@ -27,7 +28,13 @@ class CausesListView(ListView):
     context_object_name = "causes"
 
     def get_queryset(self):
-        return self.model.objects.filter(is_active=True)
+        qs = self.model.objects.filter(is_active=True)
+        if self.request.GET.get('tag'):
+                # tag filter
+                tag = self.request.GET.get("tag")
+                qs = qs.filter(tags__name__in=["%s" % tag])
+
+        return qs
 
 
 class CauseDetailView(DetailView):
@@ -40,6 +47,10 @@ class CauseDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(CauseDetailView, self).get_context_data(**kwargs)
         context['comments'] = Comments.objects.filter(cause=self.object)
+        context['commenters'] = [i['commenter'] for i in
+                                 Comments.objects.filter(cause=self.object).
+                                 values('commenter')]
+
         return context
 
     def post(self, request, slug):
