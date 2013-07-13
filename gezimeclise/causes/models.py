@@ -32,5 +32,8 @@ class Comments(models.Model):
     comment = models.TextField()
 
     class Meta:
-        unique_together = (('cause', 'commenter'))
+        unique_together = ('cause', 'commenter')
         verbose_name_plural = "comments"
+
+    def __unicode__(self):
+        return self.comment[10]

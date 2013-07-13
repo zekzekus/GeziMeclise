@@ -13,7 +13,7 @@
                 <article class="post">
                     <div class="post_header">
                         <h3 class="post_header">
-                            <a href="single_post_html">{{i.title}}</a>
+                            <a href="{% url 'cause_detail' i.slug%}">{{i.title}}</a>
                         </h3>
                         <div class="post_sub">
                             <i class="icon_time"></i>

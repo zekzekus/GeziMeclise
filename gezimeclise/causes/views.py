@@ -7,6 +7,8 @@ from django.views.generic import (ListView,
 from gezimeclise.causes.models import Cause, Comments
 from gezimeclise.causes.forms import CauseUpdateForm
 from django.http import HttpResponseRedirect, HttpResponse
+from taggit.models import Tag
+import json
 
 
 class UsersComments(ListView):
@@ -81,3 +83,15 @@ class CauseSupportView(View):
             elif support == '-':
                 cause.supporters.remove(user)
             return HttpResponse(support)
+
+
+class TagsList(View):
+
+    def get(self, context, **response_kwargs):
+        if self.request.is_ajax():
+            if self.request.GET.get("query"):
+                query = self.request.GET.get("query")
+                result = [{'name': i.name, 'id': i.id} for i in Tag.objects.filter(name__icontains=query)]
+                return HttpResponse(json.dumps(result), mimetype="application/json")
+        else:
+            return HttpResponse("huloo")

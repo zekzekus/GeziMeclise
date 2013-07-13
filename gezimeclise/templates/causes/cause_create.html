@@ -35,10 +35,12 @@
 {% endblock %}>
 {% block footer %}
 <script src="{{STATIC_URL}}js/jquery-min.js"></script>
-<script src="{{STATIC_URL}}js/jquery.tagsinput.js"></script>
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/jquery.tagsinput.css"/>
+<script src="{{STATIC_URL}}js/autocomplete.js"></script>
+<script src="{{STATIC_URL}}js/select2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/select2.css"/>
+
 <script>
-$('#id_tags').tagsInput();
+select2AutocompleteManyToManyField('tags', '/talepler/tags/gettag/')
 </script>
 {% endblock %}
 
