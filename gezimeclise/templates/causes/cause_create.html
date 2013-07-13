@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<p><h4>Profilini Güncelle</h4></p>
+<form class="form-horizontal" action="{% url 'cause_create' %}" method="post">{% csrf_token %}
+  <div class="control-group">
+      <div class="span6">
+
+  <div class="control-group">
+    <label class="control-label"><h5>Başlık</h5></label>
+    <div class="controls">
+      {{form.title}}
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label"><h5>Talep</h5></label>
+    <div class="controls">
+      {{form.description}}
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label"><h5>Bölgem</h5></label>
+    <div class="controls">
+      {{form.region}}
+    </div>
+  </div>
+<button type="submit" class="btn">Kaydet</button>
+ </form>
+
+{% endblock %}>
+{% block footer %}
+<script src="{{STATIC_URL}}js/jquery-min.js"></script>
+<script src="{{STATIC_URL}}js/jquery.tagsinput.js"></script>
+{% endblock %}

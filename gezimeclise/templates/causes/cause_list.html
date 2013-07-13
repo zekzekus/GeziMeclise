@@ -5,8 +5,9 @@
         <section id="blog">
             <div class="hgroup">
                 <h1> Talepler </h1>
+                <a href="{% url 'cause_create' %}" class="btn btn-success"> Yeni Talep oluştur</a>
             </div>
-        {% for i in causes%}
+        {% for i in causes %}
         <div class="row">
             <div id="leftcol" class="span8">
                 <article class="post">
@@ -25,7 +26,7 @@
                     <div class="post_content">
                     <p>{{i.description}}</p>
 
-                    <a href="{% url 'cause_detail' slug=i.slug %}" class="btn btn-primary">Talebe git</a>
+
                     </div>
                 </article>
             </div>

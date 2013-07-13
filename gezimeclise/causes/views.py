@@ -24,6 +24,9 @@ class CausesListView(ListView):
     template = "causes/causes_list.html"
     context_object_name = "causes"
 
+    def get_queryset(self):
+        return self.model.objects.filter(is_active=True)
+
 
 class CauseDetailView(DetailView):
     model = Cause
@@ -50,7 +53,7 @@ class CauseDetailView(DetailView):
 class CauseCreateView(CreateView):
 
     model = Cause
-    template_name = "cause/cause_create.html"
+    template_name = "causes/cause_create.html"
     form_class = CauseUpdateForm
     success_url = "/"
 
