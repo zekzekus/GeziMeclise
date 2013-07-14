@@ -76,7 +76,8 @@ THIRDPARTY_APPS = (
     'taggit',
     'markitup',
     'celery',
-    'djcelery',)
+    'djcelery',
+    'django-extensions')
 
 INSTALLED_APPS = (DJANGO_APPS +
                   GEZI_APPS +
