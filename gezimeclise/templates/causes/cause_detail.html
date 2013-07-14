@@ -68,6 +68,9 @@
                                 <div class="the_comment">
                                     <p>{{comment.comment}}</p>
                                 </div>
+                                {% if comment.commenter == request.user %}
+                                <button class="delete-comment btn btn-mini" data-comment= "{{comment.id}}" type="button">Sil</button>
+                                {% endif %}
                             </div>
                         </div>
                         {% endfor %}
@@ -125,8 +128,19 @@
 	            }
 	         });
             location.reload()
-	    })
+	    }),
+    $('.delete-comment').click(function(){
+        var comment = $(this).data('comment');
+        $.ajax({
+            url:"{% url 'delete_comment' %}",
+            type: "POST",
+            data: {"comment_id":comment, 'csrfmiddlewaretoken': '{{csrf_token}}'},
+            dataType:"json"
+        })
+        location.reload();
     });
+
+    })
     </script>
 
-{% endblock %}
+    {% endblock %}

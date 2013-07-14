@@ -64,6 +64,15 @@ class CauseDetailView(DetailView):
         return HttpResponseRedirect("/")
 
 
+class CommentDeleteView(View):
+
+    def post(self, request):
+        comment = request.POST.get('comment_id')
+        if request.user == Comments.objects.get(id=comment).commenter:
+            Comments.objects.get(id=comment).delete()
+        return HttpResponseRedirect('.')
+
+
 class CauseCreateView(CreateView):
 
     model = Cause
