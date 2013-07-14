@@ -3,7 +3,7 @@ function select2AutocompleteManyToManyField(field, request_url) {
     $("#id_" + field).select2({
         tags:true,
         tokenSeparators: [',' , " "],
-        placeholder: "Search for " + field.toLocaleUpperCase(),
+        placeholder: "Etiket Ekle",
         minimumInputLength: 2,
         createSearchChoice:function(term, data) {
           if ($(data).filter(function() {

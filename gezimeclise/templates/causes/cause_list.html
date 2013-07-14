@@ -1,9 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
+
+{% load profile_tags %}
 <div id="main">
     <div class="container">
         <section id="blog">
             <div class="hgroup">
+
+		       <div class="input-append pull-right">
+		           <form id="search" class="pull-left navbar-search" action="{% url "cause_list" %}{% update_get drop q %}">
+			         <input type="text" name="q" placeholder="Talep Ara" value="{{ request.GET.q }}">
+					<button class="btn" type="submit"><i class="icon-search"></i></button>
+		           </form>
+		       </div>
+
                 <h1> Talepler </h1>
                 <a href="{% url 'cause_create' %}" class="btn btn-success"> Yeni Talep oluştur</a>
             </div>
@@ -19,7 +29,7 @@
                             <i class="icon_time"></i>
                             {{i.added}}
                             <i class="icon-comments-alt"></i>
-                            {{i.supported_causes|length}}
+                            {{i.supporters.all|length}}
                         </div>
                     </div>
                     <br>

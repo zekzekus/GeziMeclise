@@ -28,12 +28,14 @@ class CausesListView(ListView):
     context_object_name = "causes"
 
     def get_queryset(self):
-        qs = self.model.objects.filter(is_active=True)
-        if self.request.GET.get('tag'):
-                # tag filter
-                tag = self.request.GET.get("tag")
-                qs = qs.filter(tags__name__in=["%s" % tag])
 
+        qs = self.model.objects.filter(is_active=True).order_by("-added")
+        if self.request.GET.get('tag'):
+            # tag filter
+            tag = self.request.GET.get("tag")
+            qs = qs.filter(tags__name__in=["%s" % tag])
+        if self.request.GET.get("q"):
+            qs = qs.filter(title__icontains=self.request.GET.get("q"))
         return qs
 
 
@@ -48,7 +50,8 @@ class CauseDetailView(DetailView):
         context = super(CauseDetailView, self).get_context_data(**kwargs)
         context['comments'] = Comments.objects.filter(cause=self.object)
         commenters = [i['commenter'] for i in Comments.objects.filter(cause=self.object).values('commenter')]
-        context['can_comment'] = False if self.request.user.id in commenters else True
+        context['can_comment'] = False if self.request.user.id in commenters\
+            else True
         return context
 
     def post(self, request, slug):
