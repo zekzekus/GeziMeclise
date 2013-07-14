@@ -43,14 +43,13 @@ class ProfileListView(ListView):
             else:
                 qs = qs.filter(region__id=region_id)
 
-        if self.request.GET.get('s'):
-            # sorting
-            sorting = self.request.GET.get('s')
-            if sorting == 'pop':
-                qs = qs.annotate(number_of_supporters=Count('supporters'))
-                qs = qs.order_by('-number_of_supporters')
-            elif sorting == "son":
-                qs = qs.order_by('-date_joined')
+        # sorting
+        if self.request.GET.get('s') == 'pop':
+            qs = qs.annotate(number_of_supporters=Count('supporters'))
+            qs = qs.order_by('-number_of_supporters')
+        else:
+            # default sorting
+            qs = qs.order_by('-date_joined')
         return qs
 
     def get_context_data(self, **kwargs):

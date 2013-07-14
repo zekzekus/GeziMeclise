@@ -19,10 +19,10 @@
 
                 {% if object_list %}
                 <span class="dropdown">
-                  <a href="#sorting" class="dropdown-toggle text-success" data-toggle="dropdown">{% if sorting == 'pop' %}popüler{% elif sorting == "son" %}son {% else %}Sırala{% endif %} <b class="caret"></b></a>
+                  <a href="#sorting" class="dropdown-toggle text-success" data-toggle="dropdown">{% if sorting == 'pop' %}en çok desteklenenler{% else %}yeni katılanlar{% endif %} <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="{% update_get with s='son' %}">son</a></li>
-                    <li><a href="{% update_get with s='pop' %}">popüler</a></li>
+                    <li><a href="{% update_get with s='son' %}">yeni katılanlar</a></li>
+                    <li><a href="{% update_get with s='pop' %}">en çok desteklenenler</a></li>
                   </ul>
                 </span>
                 {% endif %}
@@ -67,7 +67,16 @@
   		         </div>
   		         <div class="portfolio_description">
   		              <h3><a href="{{ profile.get_absolute_url }}">{{ obj.get_full_name }}</a></h3>
-  		              <p>{{ obj.supporters.all.count }} <i class="icon-thumbs-up"></i></p>
+  		              <p>
+  		              {% if obj.region %}
+	  		              <span class="text-warning">@{{ obj.region.name }}</span>
+	  		          {% endif %}
+  		              {% with obj.supporters.all.count as supporter_count %}
+	  		              {% if supporter_count > 0 %}
+		  		              <span class="text-success">{{ obj.supporters.all.count }} <i class="icon-thumbs-up"></i></span>
+		  		          {% endif %}
+  		              {% endwith %}
+  		              </p>
   		         </div>
   		    </div>
 		  {% endfor %}
@@ -77,7 +86,7 @@
 
 		<div class="alert alert-block">
 		  <h3>Kimseyi bulamadık</h3>
-		  Bu kriterlere uygun aday yok!
+		  Bu kriterlere uygun üye yok!
 		</div>
 
 		{% endif %}
@@ -141,13 +150,6 @@ $('#region_select').change(function() {
 
       var $container = $('#content_container');
 
-      $container.isotope({
-        itemSelector : '.portfolio_item',
-        animationOptions: {
-             queue: false
-        }
-      });
-
       $container.infinitescroll({
         navSelector  : '.pagination',    // selector for the paged navigation
         nextSelector : '.pagination a.next',  // selector for the NEXT link (to page 2)
@@ -158,10 +160,6 @@ $('#region_select').change(function() {
             msgText: "",
             selector: '#loading'
           }
-        },
-        // call Isotope as a callback
-        function( newElements ) {
-          $container.isotope( 'appended', $( newElements ) );
         }
       );
 
