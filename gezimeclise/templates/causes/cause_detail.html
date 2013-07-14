@@ -34,13 +34,20 @@
                         <div class="post_content">
                             <p>{{cause.description}}</p>
                         </div>
+                        <br>
+                        <p>
+                            <p>Etiketler</p>
+                            {% for tag in cause.tags.all %}
+                                <a class="label" href="{% url "cause_list" %}?tag={{tag.name}}">{{tag.name}}</a>
+                            {% endfor %}
+	                    </p>
                 </div>
                     </article>
 
                     <h4 style="color:red"> Yorumlar </h4>
                     <div id="post_comments">
                         {% for comment in comments %}
-                        <div class="row">
+                        <div class="row">p>
                             <figure class="span1">
                                 <img class="img-circle"
                                      src="http://graph.facebook.com/{{comment.commenter.facebook_id}}/picture?type=large">

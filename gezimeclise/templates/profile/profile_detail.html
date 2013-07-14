@@ -82,6 +82,7 @@
 	                </p>
 	            {% endif %}
 	            <p>
+                    Etiketler
 	                {% for tag in object.tags.all %}
 	                    <a class="label" href="{% url "profile_list" %}?tag={{tag.name}}">{{tag.name}}</a>
 	                {% endfor %}
