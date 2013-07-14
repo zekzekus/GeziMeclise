@@ -86,7 +86,23 @@
 	                    <a class="label" href="{% url "profile_list" %}?tag={{tag.name}}">{{tag.name}}</a>
 	                {% endfor %}
 	            </p>
-	        </div>
+                <p>
+                Oluşturduğu Talepler
+                {% for i in causes %}
+                    <p>
+                        <a href="{% url 'cause_detail' i.slug %}">{{i.title}}</a>
+                    </p>
+                {% endfor %}
+                <p>
+                <p>
+                Desteklediği Talepler
+                {% for i in supported_causes %}
+                    <p>
+                        <a href="{% url 'cause_detail' i.slug %}">{{i.title}}</a>
+                    </p>
+                {% endfor %}
+                <p>
+            </div>
 
 	        <div class="span4">
                 <!-- DISABLE TWITTER FOR NOW

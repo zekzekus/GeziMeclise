@@ -20,6 +20,9 @@ class Cause(models.Model):
         self.slug = slugify(self.title)
         super(Cause, self).save(*args, **kwargs)
 
+    def __unicode__(self):
+        return self.title[:10]
+
 
 class Comments(models.Model):
     cause = models.ForeignKey(Cause)

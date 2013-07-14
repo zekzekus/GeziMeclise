@@ -5,6 +5,7 @@ from django.views.generic import (View, ListView, DetailView,
                                   CreateView, UpdateView, DeleteView)
 from django.core.cache import get_cache
 from gezimeclise.profiles.models import GeziUser, Report, Region
+from gezimeclise.causes.models import Cause
 from gezimeclise.profiles.forms import ProfileUpdateForm, ReportForm
 from taggit.models import Tag
 
@@ -48,7 +49,7 @@ class ProfileListView(ListView):
             qs = qs.annotate(number_of_supporters=Count('supporters'))
             qs = qs.order_by('-number_of_supporters')
         else:
-            # default sorting
+            # default sortingp
             qs = qs.order_by('-date_joined')
         return qs
 
@@ -65,6 +66,12 @@ class ProfileDetailView(DetailView):
     slug_field = 'username'
     slug_url_kwarg = 'username'
     template_name = "profile/profile_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileDetailView, self).get_context_data(**kwargs)
+        context['causes'] = Cause.objects.filter(user=kwargs['object'])
+        context['supported_causes'] = Cause.objects.filter(supporters__id__exact=kwargs['object'].id)
+        return context
 
     def get_queryset(self):
         cache = get_cache('default')
