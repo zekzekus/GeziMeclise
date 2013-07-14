@@ -31,6 +31,7 @@
                             <i class="icon-comments-alt"></i>
                             {{i.supporters.all|length}}
                         </div>
+                        talep sahibi: <a href="{% url 'profile_detail' i.user.username %}">{{i.user}}</a>
                     </div>
                     <br>
                     <div class="post_content">

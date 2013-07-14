@@ -13,6 +13,7 @@
                     {{cause.supporters.all|length}}
                 </div>
 
+                    talep sahibi: <a href="{% url 'profile_detail' cause.user.username %}">{{cause.user}}</a>
             </div>
             <div class="row">
                 <div id="leftcol" class="span8">
@@ -46,7 +47,7 @@
                             </figure>
                             <div class="span7">
                                 <div class="comment_name">
-                                    {{comment.commenter.username}}
+                                    <a href="{% url 'profile_detail' comment.commenter.username %}">{{comment.commenter.username}}</a>
                                 </div>
                                 <div class="comment_date">
                                     <i class="icon-time"></i>
