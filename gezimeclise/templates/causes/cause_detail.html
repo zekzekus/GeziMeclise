@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/tr_TR/all.js#xfbml=1&appId=359117574190923";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <div id="main">
     <div class="container">
         <section id="blog">
@@ -12,9 +20,13 @@
                     <i class="icon-comments-alt"></i>
                     {{cause.supporters.all|length}}
                 </div>
-
                     talep sahibi: <a href="{% url 'profile_detail' cause.user.username %}">{{cause.user}}</a>
-            </div>
+                    <p>
+
+                   <div class="fb-like" data-href="http://gezimeclise.org{{request.get_full_path}}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+                   <a href="http://gezimeclise.org{{request.get_full_path}}" class="twitter-share-button" data-via="tunavargi">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    </p>
             <div class="row">
                 <div id="leftcol" class="span8">
                     <article class="post">
@@ -34,20 +46,13 @@
                         <div class="post_content">
                             <p>{{cause.description}}</p>
                         </div>
-                        <br>
-                        <p>
-                            <p>Etiketler</p>
-                            {% for tag in cause.tags.all %}
-                                <a class="label" href="{% url "cause_list" %}?tag={{tag.name}}">{{tag.name}}</a>
-                            {% endfor %}
-	                    </p>
                 </div>
                     </article>
 
                     <h4 style="color:red"> Yorumlar </h4>
                     <div id="post_comments">
                         {% for comment in comments %}
-                        <div class="row">p>
+                        <div class="row">
                             <figure class="span1">
                                 <img class="img-circle"
                                      src="http://graph.facebook.com/{{comment.commenter.facebook_id}}/picture?type=large">
