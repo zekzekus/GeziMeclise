@@ -1,6 +1,6 @@
 from django.db import models
-from gezimeclise.profiles.models import GeziUser, Region
 from taggit.managers import TaggableManager
+from gezimeclise.profiles.models import GeziUser, Region
 from gezimeclise.utils import slugify
 
 
@@ -19,6 +19,8 @@ class Cause(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Cause, self).save(*args, **kwargs)
+        # add the user to the supporters
+        self.supporters.add(self.user)
 
     def __unicode__(self):
         return self.title[:10]
