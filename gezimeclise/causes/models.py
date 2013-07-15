@@ -1,7 +1,7 @@
 from django.db import models
 from gezimeclise.profiles.models import GeziUser, Region
 from taggit.managers import TaggableManager
-from django.template.defaultfilters import slugify
+from gezimeclise.utils import slugify
 
 
 class Cause(models.Model):
