@@ -1,15 +1,18 @@
-from django.db.models import Q
-from gezimeclise.profiles.models import GeziUser
+#encoding: UTF-8
 
+import json
+from django.db.models import Q
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib import messages
+from django.core.urlresolvers import reverse
 from django.views.generic import (ListView,
                                   CreateView,
                                   DetailView,
                                   UpdateView, View)
+from taggit.models import Tag
+from gezimeclise.profiles.models import GeziUser
 from gezimeclise.causes.models import Cause, Comments
 from gezimeclise.causes.forms import CauseUpdateForm
-from django.http import HttpResponseRedirect, HttpResponse
-from taggit.models import Tag
-import json
 
 
 class UsersComments(ListView):
@@ -81,12 +84,16 @@ class CauseCreateView(CreateView):
     success_url = "/"
 
     def form_valid(self, form):
-
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
+        messages.success(self.request, 
+                         "Talebiniz kaydedildi, onaylandıktan sonra yayınlanacak", 
+                         extra_tags='success')
         return super(CauseCreateView, self).form_valid(form)
 
+    def get_success_url(self):
+        return reverse('cause_list')
 
 class CauseSupportView(View):
         def post(self, request):

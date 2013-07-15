@@ -12,5 +12,4 @@ urlpatterns = patterns('',
     url(r'^destek/$', CauseSupportView.as_view(), name="cause_support"),
     url(r'^delete_comment/$', CommentDeleteView.as_view(), name="delete_comment"),
     url(r'^(?P<slug>[-\w]+)/$', CauseDetailView.as_view(), name="cause_detail"),
-
 )
